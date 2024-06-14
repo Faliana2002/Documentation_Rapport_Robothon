@@ -1,0 +1,24 @@
+{% extends "!footer.html" %}
+{%- block contentinfo %}
+{{ super }}
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+{% endblock %}

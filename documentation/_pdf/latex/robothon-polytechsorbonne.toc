@@ -1,0 +1,10 @@
+\babel@toc {french}{}
+\contentsline {chapter}{\numberline {1}Vue d’ensemble du projet}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Contexte du projet}{5}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Approche pour mener à bien le projet}{7}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Environnement logiciel}{9}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Localisation de la task\sphinxhyphen {}board à l’aide de SIFT}{11}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Tâche pour appuyer sur le bouton bleu}{13}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Tâche pour le déplacement du slider en fonction d’un retour visuel}{15}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Ouverture de la trappe avant le prélèvement de la sonde}{17}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Tâche de la sonde pour un prélèvement au niveau d’un capteur}{19}{chapter.9}%

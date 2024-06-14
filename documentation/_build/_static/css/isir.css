@@ -1,0 +1,75 @@
+.wy-side-nav-search {
+    background-color:#FFFFFF;
+}
+
+.wy-side-nav-search>a {
+    color:#0090CD;
+}
+
+.wy-menu-vertical p.caption {
+    color:#0090CD;
+}
+
+.wy-side-nav-search input[type=text] {
+    border-color:#012235;
+}
+
+.wy-side-nav-search .wy-dropdown>a img.logo,
+.wy-side-nav-search>a img.logo {
+
+    max-width:50%;
+}
+
+.wy-nav-side {
+    background:#012235;
+}
+
+.wy-nav-content {
+    max-width: 100%; /* or any other value you prefer */
+    margin: 0 auto; /* centers the content */
+}
+
+.wy-menu-vertical li.current>a,
+.wy-menu-vertical li.on a {
+  color:#012235;
+}
+
+.wy-menu-vertical li.toctree-l2 a,
+.wy-menu-vertical li.toctree-l3 a,
+.wy-menu-vertical li.toctree-l4 a,
+.wy-menu-vertical li.toctree-l5 a,
+.wy-menu-vertical li.toctree-l6 a,
+.wy-menu-vertical li.toctree-l7 a,
+.wy-menu-vertical li.toctree-l8 a,
+.wy-menu-vertical li.toctree-l9 a,
+.wy-menu-vertical li.toctree-l10 a {
+  color:#012235;
+}
+
+body {
+    font-family:Lato;
+}
+
+.rst-content .toctree-wrapper>p.caption,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+legend {
+  font-family:Lato;
+}
+
+h1 {
+    color:#0090CD
+}
+
+h2 {
+    color: #012235
+}
+
+.section {
+    /* Taken from: https://github.com/bwmarrin/MkDocsPlus/blob/master/docs/mermaid/index.md#instructions */
+    opacity: 1 !important;
+}

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rappel du cahier des charges &mdash; Robothon - Polytech Sorbonne 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/isir.css?v=6ef2c474" />
+
+  
+    <link rel="shortcut icon" href="_static/icon-su.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/mermaid_isir.js?v=71f574c8"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration matérielle" href="configuration.html" />
+    <link rel="prev" title="Présentation du projet" href="presentation_projet.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Robothon - Polytech Sorbonne
+              <img src="_static/logo-robothon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Projet</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="presentation_projet.html">Présentation du projet</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Rappel du cahier des charges</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#les-objectifs-fixes-par-le-cahier-des-charges-du-projet-industriel">Les objectifs fixés par le cahier des charges du projet industriel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#regles-et-conditions-de-la-competition-robothon">Règles et conditions de la compétition Robothon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-differentes-taches-que-le-bras-de-robot-doit-realiser">Les différentes tâches que le bras de robot doit réaliser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resultats-obtenus-a-partir-du-cahier-des-charges">Résultats obtenus à partir du cahier des charges</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration matérielle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ressources.html">Ressources réutilisées</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Environnement de développement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture logiciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surcharge.html">Surcharge de la classe “<em>panda_robothon</em>”</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tf.html">Définition de TFs au niveau de l’effecteur final</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Installation système et démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_RT.html">Installation du noyau temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller_fci.html">Utilisation du controlleur du robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demarrage.html">Commandes pour exécution des tâches</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Primitives des tâches</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SIFT.html">Perception de la taskboard avec SIFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bouton-bleu.html">Tâche pour le bouton bleu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slider.html">Tâche du slider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connector.html">Tâche de déplacement du connecteur de la sonde</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trappe.html">Tâche de la trappe &amp; sonde (Partie 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonde.html">Tâche de la trappe &amp; sonde (Partie 2)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">A propos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.polytech.sorbonne-universite.fr">Polytech Sorbonne</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.isir.upmc.fr/">ISIR</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge">Robothon Grand Challenge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Robothon - Polytech Sorbonne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Rappel du cahier des charges</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rappel_cdc.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rappel-du-cahier-des-charges">
+<h1>Rappel du cahier des charges<a class="headerlink" href="#rappel-du-cahier-des-charges" title="Link to this heading"></a></h1>
+<style>
+    .image{
+    border: 5px solid #116aa4;
+    border-radius: 10px;
+    /* padding: 2px; */
+    }
+</style>
+<section id="les-objectifs-fixes-par-le-cahier-des-charges-du-projet-industriel">
+<h2>Les objectifs fixés par le cahier des charges du projet industriel<a class="headerlink" href="#les-objectifs-fixes-par-le-cahier-des-charges-du-projet-industriel" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Faire un état de l’art des solutions qui ont fonctionné ou dysfonctionné pendant les précédentes éditions de la comptition;</p></li>
+<li><p>Concevoir un préhenseur adapté aux différentes tâches;</p></li>
+<li><p>Développer des modules ré-utilisables et open-source pour les différentes tâches;</p></li>
+<li><p>Faire une démonstration fonctionnelle en automatique (avec le moins d’interaction humaine possible avec le bars de robot).</p></li>
+</ul>
+</section>
+<section id="regles-et-conditions-de-la-competition-robothon">
+<h2>Règles et conditions de la compétition Robothon<a class="headerlink" href="#regles-et-conditions-de-la-competition-robothon" title="Link to this heading"></a></h2>
+<p>Ci-dessous, on aura les conditions théoriques de la compétition avec le déroulement et les modalités d’évaluation des performances :</p>
+<ul class="simple">
+<li><p>La task-board des tâches et les fiches d’essai seront envoyés aux équipes au début de la compétition à la fin du mois de mars.</p></li>
+<li><p>Au cours de la période de développement de 30 jours, les équipes doivent développer leur plateforme robotique afin de réaliser des essais au cours desquels elles déplacent la task-board, de son état de départ à son état d’arrivée sans aucune intervention humaine.</p></li>
+<li><p>Les équipes seront évaluées sur la base d’une vidéo non coupée de leur robot exécutant leur solution sur la task-board <strong>ET</strong> d’une présentation en direct avec le jury du Grand défi, qui sera programmée lors d’un appel vidéo.</p></li>
+<li><p>Avant de commencer un essai, les équipes doivent déplacer la task-board à un endroit aléatoire sur des bandes velcro placées sur une table devant le robot afin d’éviter de préprogrammer des trajectoires de mouvement fixes.</p></li>
+<li><p>Une fois l’essai commencé, le robot de chaque équipe doit accomplir l’ensemble des tâches de manière autonome. Toute intervention humaine se traduira par des points négatifs dans le score final de l’équipe.</p></li>
+<li><p>Les essais ont une durée maximale de 10 minutes.</p></li>
+<li><p>Deux essais au maximum seront autorisés lors de la présentation en direct avec le jury du grand défi.</p></li>
+<li><p>Les équipes qui obtiennent le même nombre de points seront départagées par le temps de parcours total le plus rapide.</p></li>
+</ul>
+</section>
+<section id="les-differentes-taches-que-le-bras-de-robot-doit-realiser">
+<h2>Les différentes tâches que le bras de robot doit réaliser<a class="headerlink" href="#les-differentes-taches-que-le-bras-de-robot-doit-realiser" title="Link to this heading"></a></h2>
+<div class="context" align="justify">
+<ol class="arabic simple">
+<li><p>Appuyer sur le bouton bleu,</p></li>
+<li><p>Déplacer un curseur à l’aide de l’effecteur du bras, de sorte à ce que le point du curseur corresponde à la consigne définie sur l’interface (l’écran près du bouton M5) avec l’alignement des triangles (le triangle rouge devra s’aligner avec les triangles jaune et ensuite vert),</p></li>
+<li><p>Gripper le connecteur femelle de la sonde pour le retirer puis l’insérer dans l’autre port de la task board,</p></li>
+<li><p>Ouvrir la trappe et manipuler la sonde afin d’appuyer sur le capteur, présent dans le compartiment en-dessous de la trappe, puis la remettre à sa place initiale (ou sur un support annexe),</p></li>
+<li><p>Enrouler le câble de la sonde autour des deux épaulements montées au bord de la task-board,</p></li>
+<li><p>Arrêt de la task board en appuyant sur le bouton rouge avec la pince.</p></li>
+</ol>
+</div>
+<table align="center">
+    <tr>
+      <th>
+        <div class="image">
+          <img src="./img/new/Tache_task_board.png"/>
+        </div>
+      </th>     
+    </tr>
+</table>
+<figure class="align-center" id="id1">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">La description des tâches avec les composantes de la task-board associées</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="resultats-obtenus-a-partir-du-cahier-des-charges">
+<h2>Résultats obtenus à partir du cahier des charges<a class="headerlink" href="#resultats-obtenus-a-partir-du-cahier-des-charges" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Un des objectifs principaux de la compétition est de développer des modules et des codes open-source, d’où la création d’un repository sur le gitlab de Sorbonne Université permettant un accès libre aux différents programmes. En terme de réutilisabilité, nos codes ont été commentés, des readme sont présents sur le repo pour expliquer les différents processus d’installation, ou encore expliquant l’arborescence des différents packages et les méthodes utilisées (et pourquoi).</p></li>
+</ul>
+<p>Dans la dynamique du travail collaboratif, on a créé un repository sur gitlabsu (<a class="reference external" href="https://gitlabsu.sorbonne-universite.fr/robothon-sorbonne">https://gitlabsu.sorbonne-universite.fr/robothon-sorbonne</a>) avec différents packages en fonction des tâches et des différents installations qu’il fallait qu’on fasse pour s’harmoniser au niveau du groupe.</p>
+<table align="center" cellspacing="10" cellpadding="5" style="width: 70%">
+    <tr>
+        <th>
+            <div class="image"><img src="./img/new/gitlabsu.png"/></div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id2">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Aperçu de la page gitlabsu avec le projet Robothon</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Vous pouvez voir dans les différentes pages de chaque tâche, une vidéo de démonstration d’exécution :</p>
+<ul>
+<li><p><a class="reference internal" href="bouton-bleu.html">Tâche du bouton bleu</a></p></li>
+<li><p><a class="reference internal" href="slider.html">Tâche du slider</a></p></li>
+<li><p><a class="reference internal" href="connector.html">Tâche du connecteur de la sonde</a></p></li>
+<li><p><a class="reference internal" href="trappe.html">Tâche de la trappe</a></p></li>
+<li><p><a class="reference internal" href="sonde.html">Tâche de la sonde</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="presentation_projet.html" class="btn btn-neutral float-left" title="Présentation du projet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration matérielle" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+<jinja2.runtime.BlockReference object at 0x7f692392f1d0>
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

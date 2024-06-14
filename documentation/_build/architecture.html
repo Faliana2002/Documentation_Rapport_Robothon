@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architecture logiciel &mdash; Robothon - Polytech Sorbonne 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/isir.css?v=6ef2c474" />
+
+  
+    <link rel="shortcut icon" href="_static/icon-su.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/mermaid_isir.js?v=71f574c8"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Surcharge de la classe “panda_robothon”" href="surcharge.html" />
+    <link rel="prev" title="Ressources réutilisées" href="ressources.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Robothon - Polytech Sorbonne
+              <img src="_static/logo-robothon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Projet</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="presentation_projet.html">Présentation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rappel_cdc.html">Rappel du cahier des charges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration matérielle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ressources.html">Ressources réutilisées</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Environnement de développement</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Architecture logiciel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-de-docker-avec-ros-et-tous-les-packages-necessaires">Installation de Docker avec ROS et tous les packages nécessaires</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ros-1-version-noetic">ROS 1 (Version Noetic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#les-avantages-majeurs-de-ros">Les avantages majeurs de ROS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ressources-pour-creer-un-urdf-et-comprendre-le-fonctionnement-de-ce-type-de-fichier">Ressources pour créer un URDF et comprendre le fonctionnement de ce type de fichier</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quest-ce-que-docker">Qu’est-ce que “Docker” ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#presentation-des-sous-modules-packages">Présentation des sous-modules (packages)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#structure-logiciel-pour-la-perception-et-la-planification-de-trajectoires">Structure logiciel pour la perception et la planification de trajectoires</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="surcharge.html">Surcharge de la classe “<em>panda_robothon</em>”</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tf.html">Définition de TFs au niveau de l’effecteur final</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Installation système et démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_RT.html">Installation du noyau temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller_fci.html">Utilisation du controlleur du robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demarrage.html">Commandes pour exécution des tâches</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Primitives des tâches</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SIFT.html">Perception de la taskboard avec SIFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bouton-bleu.html">Tâche pour le bouton bleu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slider.html">Tâche du slider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connector.html">Tâche de déplacement du connecteur de la sonde</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trappe.html">Tâche de la trappe &amp; sonde (Partie 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonde.html">Tâche de la trappe &amp; sonde (Partie 2)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">A propos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.polytech.sorbonne-universite.fr">Polytech Sorbonne</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.isir.upmc.fr/">ISIR</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge">Robothon Grand Challenge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Robothon - Polytech Sorbonne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Architecture logiciel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/architecture.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="architecture-logiciel">
+<h1>Architecture logiciel<a class="headerlink" href="#architecture-logiciel" title="Link to this heading"></a></h1>
+<style>
+    .image{
+    border: 5px solid #116aa4;
+    border-radius: 10px;
+    /* padding: 2px; */
+    }
+</style>
+<section id="installation-de-docker-avec-ros-et-tous-les-packages-necessaires">
+<h2>Installation de Docker avec ROS et tous les packages nécessaires<a class="headerlink" href="#installation-de-docker-avec-ros-et-tous-les-packages-necessaires" title="Link to this heading"></a></h2>
+<p>Logiciels installés (incluant environnement, et OS à avoir) :</p>
+<ul class="simple">
+<div class="demarrage" align="justify">
+<li><p>Linux (Ubuntu, peu importe la version car on va utiliser Docker),</p></li>
+<li><p>Docker (pour pouvoir contenir ROS Noetic qui n’est utilisable que sous Ubuntu version 20.04),</p></li>
+<li><p>ROS1 Noetic (”<em>Robotic Operating System</em>” installé dans Docker),</p></li>
+<li><p>Terminator (gestionnaire de terminal pour faciliter la compilation de plusieurs programmes en ayant un oeil sur les autres en train de tourner).</p></li>
+<table align="center" cellspacing="10" cellpadding="5" style="width: 50%">
+    <tr>
+        <th>
+            <img src="./img/new/ubuntu_logo.png" width="500" height="200"/>
+        </th>
+        <th>
+            <img src="./img/new/logo_docker.jpg" width="1000" height="400"/>
+        </th>
+        <th>
+            <img src="./img/new/logo_git.png" width="500" height="200"/>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id1">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Logos de Ubuntu et de Docker</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table align="center" cellspacing="10" cellpadding="5" >
+    <tr>
+        <th><img src="./img/new/ROS.png" width="300" height="200"/></th>
+        <th><img src="./img/new/Noetic.png" width="300" height="200"/></th>
+        <th><img src="./img/new/terminator.png" width="300" height="200"/></th>
+    </tr>
+</table>
+<figure class="align-center" id="id2">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Logos de ROS Noetic et Terminator</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div>
+</ul>
+</section>
+<section id="ros-1-version-noetic">
+<h2>ROS 1 (Version Noetic)<a class="headerlink" href="#ros-1-version-noetic" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://ros.org">ROS</a> ou <strong>Robotic Operating System</strong> nous permet dans ce projet de pouvoir simuler des déplacements du bras de robot à l’aide de logiciels de simulation tels que RVIZ (pour l’affichage des différents repères ou TF au niveau des articulations du robot et de n’importe quel corps intégré à RVIZ) et Gazebo (pour les retours de forces pĥysiques), mais aussi de pouvoir planifier des mouvements et des trajectoires réels pour pouvoir faire des tâches de manipulation à l’aide de l’effecteur finale (constitué de pinces pour la saisie en fonction  des surfaces) comme dans notre cas.</p>
+<table align="center" cellspacing="20" cellpadding="5" style="width: 100%">
+    <tr>
+      <th>
+        <div class="image">
+          <img src="./img/new/RVIZ_Gazebo.png"/>
+        </div>
+      </th>    
+    </tr>
+</table>
+<figure class="align-center" id="id3">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Aperçu d’une simulation sur RVIZ et Gazebo (affichage du robot Panda Franka Emika)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="les-avantages-majeurs-de-ros">
+<h3>Les avantages majeurs de ROS<a class="headerlink" href="#les-avantages-majeurs-de-ros" title="Link to this heading"></a></h3>
+<p>ROS permet de faire le lien entre différents modules et programmes, développés indépendemment les uns des autres grâceau lancement de noeuds qui est possible dans un fichier de lancement ou un “<em>launchfile</em>” qui peut générer plusieurs noeuds ROS en même temps, se basant sur des scripts soit Python, soit en C++, ce qui est un réel avantage en terme de codage dans le cas où le programme nécessite un niveau de fiabilité le plus élevé possible ou juste un niveau de programmation assez simple et facile de compréhension. On peut aussi représenter des systèmes entiers comme un robot, ou encore une boîte, géométriquement parlant avec les fichiers de format URDF qui permet de relier différentes articulations entre elles (ou les “<em>joint</em>” sur RVIZ), et de pouvoir définir des TFs et pouvoir illustrer l’aspect solide ou pas des articulations avec l’intégration de <em>collision</em> dans les paramètres.</p>
+<table align="center" cellspacing="20" cellpadding="5" style="width: 70%">
+    <tr>
+      <th>
+        <div class="image">
+          <img src="./img/new/URDF_example.png"/>
+        </div>
+      </th>    
+    </tr>
+</table>
+<figure class="align-center" id="id4">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Exemple d’un fichier URDF avec le code associé</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="ressources-pour-creer-un-urdf-et-comprendre-le-fonctionnement-de-ce-type-de-fichier">
+<h3>Ressources pour créer un URDF et comprendre le fonctionnement de ce type de fichier<a class="headerlink" href="#ressources-pour-creer-un-urdf-et-comprendre-le-fonctionnement-de-ce-type-de-fichier" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="http://wiki.ros.org/urdf/Tutorials/Create%20your%20own%20urdf%20file">http://wiki.ros.org/urdf/Tutorials/Create your own urdf file</a></p></li>
+<li><p><a class="reference external" href="http://wiki.ros.org/urdf/Tutorials/Parse%20a%20urdf%20file">http://wiki.ros.org/urdf/Tutorials/Parse a urdf file</a></p></li>
+<li><p><a class="reference external" href="http://wiki.ros.org/urdf/Tutorials/Building%20a%20Movable%20Robot%20Model%20with%20URDF">http://wiki.ros.org/urdf/Tutorials/Building a Movable Robot Model with URDF</a></p></li>
+</ul>
+<p>A l’aide des différents éléments de ROS (les services, les messages, les paramètres, les Publishers et les Subscribers), on peut en même temps avoir accès aux données en temps réel du robot (position, orientation), mais on peut aussi lui indiquer un mouvement ou une position à atteindre (à l’aide d’un Publisher). Bien-sûr tout cela fait en temps réel d’où la nécessité d’un noyau Linux Ubuntu RT (Real Time) pour pouvoir fluidifier au maximum les déplacements du robot en fonction du temps.</p>
+<table align="center" cellspacing="20" cellpadding="5" style="width: 50%">
+    <tr>
+      <th>
+        <div class="image">
+          <img src="./img/new/ROS_fields.jpg"/>
+        </div>
+      </th>    
+    </tr>
+</table>
+<figure class="align-center" id="id5">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Les différents domaines d’utilisation de ROS</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table align="center" cellspacing="20" cellpadding="5" style="width: 50%">
+    <tr>
+      <th>
+        <div class="image">
+          <img src="./img/new/PictureROSFINAL2.png"/>
+        </div>
+      </th>
+    </tr>  
+</table>
+<table align="center" cellspacing="20" cellpadding="5" style="width: 70%">
+    <tr>
+      <th>
+        <div class="image">
+          <img src="./img/new/Concepts-de-base-de-ROS.jpg"/>
+        </div>
+      </th>
+    </tr>
+</table>
+<figure class="align-center" id="id6">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Description générale de ROS avec le concept de base</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>L’image ci-dessus illustre les concepts de base de ROS concernant la communication entre les nœuds. Voici une description succincte des principaux concepts représentés :</p>
+<ul class="simple">
+<li><p>Nœuds (<a class="reference external" href="http://wiki.ros.org/fr/ROS/Tutorials/UnderstandingNodes">Nodes</a>) : Les nœuds sont des processus individuels qui effectuent des tâches spécifiques. Ils peuvent communiquer entre eux pour coordonner leurs actions.</p></li>
+<li><p>Services (<a class="reference external" href="http://wiki.ros.org/Services">Service</a>) : Un service permet une communication synchrone entre deux nœuds. Un nœud peut demander un service à un autre nœud et attendre une réponse. Cela est représenté par une connexion directe entre deux nœuds via le service.</p></li>
+<li><p><a class="reference external" href="http://wiki.ros.org/Topics">Topic</a> : Les topics permettent une communication asynchrone entre les nœuds. Les nœuds peuvent publier des messages sur un topic ou s’abonner à un topic pour recevoir des messages. Cela permet une diffusion de l’information d’un nœud vers plusieurs nœuds sans connexion directe entre chaque pair de nœuds.</p></li>
+<li><p>Publications et Abonnements (Publication, Subscription avec <a class="reference external" href="http://wiki.ros.org/fr/ROS/Tutorials/UnderstandingNodes">python</a> ou avec <a class="reference external" href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29">C++</a>) : Un nœud qui publie des messages sur un topic envoie de l’information, tandis qu’un nœud qui s’abonne à un topic reçoit les messages publiés. Un même topic peut avoir plusieurs nœuds éditeurs (publishers) et plusieurs nœuds abonnés (subscribers).</p></li>
+<li><p>Dans ROS (Robot Operating System), un callback est une fonction qui est appelée automatiquement lorsqu’un certain événement se produit, comme la réception d’un message sur un topic ou l’arrivée d’une requête de service.</p></li>
+</ul>
+</section>
+</section>
+<section id="quest-ce-que-docker">
+<h2>Qu’est-ce que “Docker” ?<a class="headerlink" href="#quest-ce-que-docker" title="Link to this heading"></a></h2>
+<div class="demarrage" align="justify">
+<p>Docker est une plateforme open source qui automatise le déploiement d’applications dans des conteneurs légers. Un conteneur regroupe l’application et toutes ses dépendances dans un seul paquet, garantissant que l’application fonctionne de manière cohérente, quel que soit l’environnement, donc indépendante à l’OS dans lequel il est. Docker permet de créer, déployer et gérer ces conteneurs de manière efficace, offrant ainsi une solution portable et flexible pour le développement et le déploiement d’applications. Il simplifie également la gestion des versions et des configurations, facilitant la collaboration entre les équipes de développement et d’exploitation.</p>
+<p>Dans notre cas, on l’utilise pour la gestion de version, donc pouvoir utiliser ROS Noetic même avec un OS Ubuntu version 22.04, qui de base n’est pas compatible avec cette version de ROS, mais on utilise aussi Docker pour harmoniser les environnements sur chacun de nos appareils (les ordinateurs auront donc la même configuration et les mêmes pachages une fois que l’image Docker est compilée).</p>
+</div>
+<table align="center" cellspacing="10" cellpadding="5" style="width: 100%">
+    <tr>
+        <th>
+            <div class="image"><img src="./img/new/Lancement_docker.png"/></div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id7">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Aperçu lors du lancement de Docker</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="presentation-des-sous-modules-packages">
+<h2>Présentation des sous-modules (packages)<a class="headerlink" href="#presentation-des-sous-modules-packages" title="Link to this heading"></a></h2>
+<p>Les modules et codes développés durant ce projet sont disponibles en open-source sur le gitlab de Sorbonne Université à ce <a class="reference external" href="https://gitlabsu.sorbonne-universite.fr/robothon-sorbonne">lien</a>. Le repository “<em>robothon-sorbonne</em>” contient tous les packages avec tous les scripts et launchfile pour la réalisation des différentes tâches avec la perception de la task-board mais aussi la planification de trajectoires, vous avez ci-dessous un aperçu de l’arborescence des différents modules :</p>
+<figure class="align-center" id="id8">
+<div class="mermaid">
+            graph LR
+  A(robothon-sorbonne) --&gt; B[box_localization]
+  A(robothon-sorbonne) --&gt; C[visual_control]
+  A(robothon-sorbonne) --&gt; D[combined]
+  A(robothon-sorbonne) --&gt; E[trajectory]
+  A(robothon-sorbonne) --&gt; F[Probe_task]
+  A(robothon-sorbonne) --&gt; G[easy_handeye]
+        </div><figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Arborescence des sous-modules</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="structure-logiciel-pour-la-perception-et-la-planification-de-trajectoires">
+<h2>Structure logiciel pour la perception et la planification de trajectoires<a class="headerlink" href="#structure-logiciel-pour-la-perception-et-la-planification-de-trajectoires" title="Link to this heading"></a></h2>
+<p>Il faut savoir qu’on a organisé l’arborescence de nos programmes de sorte à ce qu’on ait un “<em>superviseur</em>” qui permet de lancer tous les scripts des différentes tâches en fonction de la requête de l’utilisateur dans le terminal sur la tâche à exécuter. Bien évidemment avant tout planification de trajectoires, il faut d’abord localiser la boîte avec <a class="reference internal" href="SIFT.html">SIFT</a>, puis ensuite faire le choix d’être seulement en simulation ou non, et enfin choisir la tâche.</p>
+<p>Par définition, une “<strong>primitive</strong>” est une tâche primaire ou une brique logicielle qui permet de réaliser une tâche, en associant une chaîne de caractères (le nom de la tâche) pour l’exécution directe de la tâche.</p>
+<p>Un diagramme détaille correctement le raisonnement ci-dessous :</p>
+<figure class="align-center" id="id9">
+<div class="mermaid">
+            graph TD
+Z[Launchfile : franka_positions.launch] --&gt; A[Contrôlleur : franka_controller]
+A -- paramètre simulation = false --&gt; B(Robot réel)
+A -- paramètre simulation = true --&gt; C(Simulation avec Gazebo)
+Z --&gt; D[Superviseur : positions.py]
+D --&gt; H(Tâches)
+H --&gt; A
+Z -- paramètre camera = true --&gt; E[Caméra + box_localization]
+Z --&gt; F[RVIZ]
+Z --&gt; G[URDF : Modèle de la boîte]
+G &lt;--&gt; F
+E -- Calcul de la position --&gt; G
+G &lt;--&gt; Robot
+Robot --&gt; F
+
+subgraph Robot
+  B
+  C
+end
+        </div><figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Architecture logiciel</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>A partir de ce diagramme, on identifie “<em>Gazebo</em>” comme un logiciel permettant d’avoir un retour de force, et RVIZ est là que pour la visualisation de la simulation avec les différents TFs ou repères au niveau de la task-board et au niveau du bras de robot Panda. Le “<code class="docutils literal notranslate"><span class="pre">superviseur</span></code>” est relié au fichier de lanchement (”<code class="docutils literal notranslate"><span class="pre">franka_positions.launch</span></code>”) permet de générer le noeud à partir de ce script, et c’est après qu’il lance ls différents scripts pour chaque tâche.</p>
+<figure class="align-center" id="id10">
+<div class="mermaid">
+            graph TD
+  Y(Launchfile : franka_positions.launch) --&gt; A(Superviseur : positions.py)
+
+  A(Superviseur : positions.py) -- paramètre simulation = false --&gt; B[Robot Réel]
+  A(Superviseur : positions.py) -- paramètre simulation = true --&gt; C[Simulation avec Gazebo]
+  C -- paramètre simulation = false --&gt; B
+  B --&gt; D[Tâche du bouton]
+  B --&gt; E[Tâche du slider]
+  B --&gt; F[Déplacement du connecteur de la sonde]
+  B --&gt; G[Ouverture de la trappe]
+  B --&gt; H[Tache de la sonde]
+  C --&gt; D[Tâche du bouton]
+  C --&gt; E[Tâche du slider]
+  C --&gt; F[Déplacement du connecteur de la sonde]
+  C --&gt; G[Ouverture de la trappe]
+  C --&gt; H[Tache de la sonde]
+        </div><figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Détail des différentes tâches à exécuter</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Ci-dessus, on a le diagramme montrant les différentes tâches que le superviseur permet de lancer ces tâches tant pour la simulation que le déplacement du robot réel.</p>
+<!-- ## Démarche mise en œuvre our la tâche : appuyer sur un bouton (cas d'usage)
+
+1. **Localiser la boîte (sift)**
+   - Entrée : Image
+   - Sortie : Transformation `Tf(boîte/caméra)`
+
+2. **Localiser la boîte par rapport au robot (sift)**
+   - Entrée : Transformation `Tf(boîte/caméra)`
+   - Sortie : Transformation `Tf(boîte/robot)`
+
+3. **Position initiale du robot**
+   - Entrée : Transformation `Tf(boîte/robot)`
+
+### Etat de la boîte
+- Transformation de l'état de la boîte : `Tf(boîte/caméra)` -> `Tf(boîte/robot)`
+
+4. **Asservissement visuel (OpenCV)**
+   - Entrée : Image
+   - Sortie : Vitesse
+
+5. **Commande du robot (mouvement dans l’espace opérationnel)**
+   - Entrée : Vitesse
+
+### Finalité
+- Va permettre de se placer au dessus du bouton -->
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ressources.html" class="btn btn-neutral float-left" title="Ressources réutilisées" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="surcharge.html" class="btn btn-neutral float-right" title="Surcharge de la classe “panda_robothon”" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+<jinja2.runtime.BlockReference object at 0x7f692381ded0>
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

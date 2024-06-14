@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tâche pour le bouton bleu &mdash; Robothon - Polytech Sorbonne 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/isir.css?v=6ef2c474" />
+
+  
+    <link rel="shortcut icon" href="_static/icon-su.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/mermaid_isir.js?v=71f574c8"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tâche du slider" href="slider.html" />
+    <link rel="prev" title="Perception de la taskboard avec SIFT" href="SIFT.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Robothon - Polytech Sorbonne
+              <img src="_static/logo-robothon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Projet</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="presentation_projet.html">Présentation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rappel_cdc.html">Rappel du cahier des charges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration matérielle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ressources.html">Ressources réutilisées</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Environnement de développement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture logiciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surcharge.html">Surcharge de la classe “<em>panda_robothon</em>”</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tf.html">Définition de TFs au niveau de l’effecteur final</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Installation système et démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_RT.html">Installation du noyau temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller_fci.html">Utilisation du controlleur du robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demarrage.html">Commandes pour exécution des tâches</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Primitives des tâches</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SIFT.html">Perception de la taskboard avec SIFT</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tâche pour le bouton bleu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#objectifs">Objectifs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etapes-principales-pour-la-realisation-de-la-tache">Etapes principales pour la réalisation de la tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#positionnement-de-leffecteur-final-au-niveau-du-bouton-bleu">Positionnement de l’effecteur final au niveau du bouton bleu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#utilisation-de-ros">Utilisation de ROS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methode-run-de-la-classe-position-permettant-de-deplacer-l-effecteur-final-en-fonction-des-saisies-dans-le-terminal">Méthode “<em>run</em>” de la classe “<em>position</em>” permettant de déplacer l’effecteur final en fonction des saisies dans le terminal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#problemes-rencontrees">Problèmes rencontrées</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solutions-experimentees">Solutions expérimentées</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#video-de-demonstration-de-la-tache">Vidéo de démonstration de la tâche</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slider.html">Tâche du slider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connector.html">Tâche de déplacement du connecteur de la sonde</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trappe.html">Tâche de la trappe &amp; sonde (Partie 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonde.html">Tâche de la trappe &amp; sonde (Partie 2)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">A propos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.polytech.sorbonne-universite.fr">Polytech Sorbonne</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.isir.upmc.fr/">ISIR</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge">Robothon Grand Challenge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Robothon - Polytech Sorbonne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tâche pour le bouton bleu</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/bouton-bleu.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tache-pour-le-bouton-bleu">
+<h1>Tâche pour le bouton bleu<a class="headerlink" href="#tache-pour-le-bouton-bleu" title="Link to this heading"></a></h1>
+<section id="tache-pour-appuyer-sur-le-bouton-bleu">
+<style>
+  .image{
+  border: 5px solid #116aa4;
+  border-radius: 10px;
+  /* padding: 2px; */
+  }
+</style>
+<section id="objectifs">
+<h2>Objectifs<a class="headerlink" href="#objectifs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<div class="blue_button" align="justify">
+<li><p>Localiser la task-board avec SIFT (se basant sur la comparaison entre une image de la task-board et le flux capturé par la caméra)</p></li>
+<li><p>En simulation, aligner le repère de la task-board virtuelle (“task_board_base_link” défini dans l’URDF de la boîte) avec le repère “box” qui est créé par le SIFT, indiquant la position réelle de la task-board par rapport à la caméra et au robot dans la vie réel</p></li>
+<li><p>Aligner le repère du bouton bleu (“task_board_blue_button_link”) et celui de l’effecteur final (“panda_EE”), avant d’appuyer sur le bouton en question</p></li>
+<li><p>Exercer une pression sur le bouton bleu de sorte à éviter de l’endommager avec la task-board et revenir en une position de base qu’on a appelé “home” ou “home2” c’est-à-dire une position où l’effecteur est localisé à l’origine avec une hauteur soit de 0.25m soit de 0.5m</p></li>
+</div>
+</ul>
+</section>
+<section id="etapes-principales-pour-la-realisation-de-la-tache">
+<h2>Etapes principales pour la réalisation de la tâche<a class="headerlink" href="#etapes-principales-pour-la-realisation-de-la-tache" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Positionner l’effecteur final au-dessus du bouton bleu,</p></li>
+<li><p>Ajuster la raideur du bras de robot Panda</p></li>
+<li><p>Descendre l’effecteur final jusqu’à au maximum 1mm de profondeur après contact avec le bouton bleu</p></li>
+</ul>
+</section>
+<section id="positionnement-de-leffecteur-final-au-niveau-du-bouton-bleu">
+<h2>Positionnement de l’effecteur final au niveau du bouton bleu<a class="headerlink" href="#positionnement-de-leffecteur-final-au-niveau-du-bouton-bleu" title="Link to this heading"></a></h2>
+<section id="utilisation-de-ros">
+<h3>Utilisation de ROS<a class="headerlink" href="#utilisation-de-ros" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>roslaunch<span class="w"> </span>trajectory<span class="w"> </span>franka_positions.launch
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><h4>Les différents noeuds lancés par le <code class="docutils literal notranslate"><span class="pre">launchfile</span></code> :</h4></p><br>
+<ul>
+<li><p>Noeud lancé à partir d’un script “<em>positions.py</em>”, contenant les méthodes pour atteindre les positions de base (“home” et “home2”) et les positions du bouton bleu, du slider et de la trappe,</p></li>
+<li><p>Noeud lancé à partir d’un script “<em>trappes.py</em>”, pour l’ouverture de la trappe selon une trajectoire circulaire.</p></li><br>
+</ul>
+</li>
+<li><p><h4>Affichage du repère ou de la TF de l’effecteur final (“<i>panda_EE</i>”) et du bouton bleu (“<i>task_board_blue_button</i>”) :</h4></p></li>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/TF_Task_Blue.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id1">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">TFs de l’effecteur final et du bouton bleu.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<li><p><h4>Alignement des deux TFs :</h4></p></li>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/Task_blue.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id2">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">TF de l’effecteur placé au-dessus de la TF du bouton bleu.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="methode-run-de-la-classe-position-permettant-de-deplacer-l-effecteur-final-en-fonction-des-saisies-dans-le-terminal">
+<h3>Méthode “<em>run</em>” de la classe “<em>position</em>” permettant de déplacer l’effecteur final en fonction des saisies dans le terminal<a class="headerlink" href="#methode-run-de-la-classe-position-permettant-de-deplacer-l-effecteur-final-en-fonction-des-saisies-dans-le-terminal" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>def<span class="w"> </span>run<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">  </span><span class="k">while</span><span class="w"> </span>not<span class="w"> </span>rospy.is_shutdown<span class="o">()</span>:
+<span class="w">    </span><span class="nv">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>input<span class="o">(</span><span class="s2">&quot;Position : &quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>position<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.keys.keys<span class="o">()</span>:
+<span class="w">      </span><span class="nv">char</span><span class="o">=</span>self.keys<span class="o">[</span>position<span class="o">]</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;home2&#39;</span>:
+<span class="w">        </span>self.panda.home<span class="o">(</span><span class="m">0</span>.25<span class="o">)</span>
+<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;home&#39;</span>:
+<span class="w">        </span>self.panda.home<span class="o">(</span><span class="m">0</span>.5<span class="o">)</span>
+<span class="w">        </span>self.localization<span class="o">()</span>
+<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;quit&quot;</span>:<span class="w">  </span><span class="c1"># STOP</span>
+<span class="w">        </span>rospy.signal_shutdown<span class="o">(</span><span class="s2">&quot;User initiated shutdown&quot;</span><span class="o">)</span>
+<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>:
+<span class="w">        </span><span class="c1"># pose=self.panda.get_pose_EE()</span>
+<span class="w">        </span><span class="c1"># rospy.loginfo(pose)</span>
+<span class="w">        </span><span class="nv">pose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PoseStamped<span class="w"> </span><span class="o">()</span>
+<span class="w">        </span>pose.pose.position.x<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">        </span>pose.pose.position.y<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.2
+<span class="w">        </span>pose.pose.position.x<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+
+<span class="w">        </span>rospy.loginfo<span class="o">(</span>pose<span class="o">)</span>
+<span class="w">        </span>self.panda.go_to_pose_EE<span class="o">(</span><span class="s1">&#39;panda_EE&#39;</span>,pose,False<span class="o">)</span>
+<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="s1">&#39;circle&#39;</span>:
+<span class="w">        </span><span class="c1"># theta goes from 0 to 2pi</span>
+<span class="w">        </span><span class="nv">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.linspace<span class="o">(</span><span class="m">0</span>,<span class="w"> </span><span class="m">2</span>*np.pi,<span class="w"> </span><span class="m">2000</span><span class="o">)</span>
+
+<span class="w">        </span><span class="c1"># the radius of the circle</span>
+<span class="w">        </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.1
+
+<span class="w">        </span><span class="c1"># compute x1 and x2</span>
+<span class="w">        </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>r*np.cos<span class="o">(</span>theta<span class="o">)</span><span class="w"> </span>+<span class="w"> </span>self.panda.curr_pos<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">        </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>r*np.sin<span class="o">(</span>theta<span class="o">)</span><span class="w"> </span>+<span class="w"> </span>self.panda.curr_pos<span class="o">[</span><span class="m">1</span><span class="o">]</span>
+<span class="w">        </span><span class="c1"># z = np.linspace(self.panda.curr_pos, self.panda.curr_pos, 100)</span>
+<span class="w">        </span><span class="nv">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.full<span class="o">((</span><span class="m">2000</span><span class="o">)</span>,<span class="w"> </span>self.panda.curr_pos<span class="o">[</span><span class="m">2</span><span class="o">])</span>
+<span class="w">        </span>self.panda.set_stiffness<span class="o">(</span><span class="m">4000</span>,<span class="w"> </span><span class="m">4000</span>,<span class="w"> </span><span class="m">4000</span>,<span class="w"> </span><span class="m">50</span>,<span class="w"> </span><span class="m">50</span>,<span class="w"> </span><span class="m">50</span>,<span class="w"> </span><span class="m">10</span><span class="o">)</span>
+
+<span class="w">        </span>self.panda.play_trajectory<span class="o">(</span>x,<span class="w"> </span>y,<span class="w"> </span>z<span class="o">)</span>
+<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;door&#39;</span>:
+<span class="w">        </span>self.door<span class="o">()</span>
+<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;connector&#39;</span>:
+<span class="w">        </span>self.connector<span class="o">()</span>
+<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;wire&#39;</span>:
+<span class="w">        </span>self.wire<span class="o">()</span>
+<span class="w">      </span>
+<span class="w">      </span><span class="c1">##########################################################################</span>
+<span class="w">      </span><span class="c1">####################### Tâche du bouton bleu #############################</span>
+<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;blue_button&#39;</span>:
+<span class="w">        </span>self.panda.move_gripper<span class="o">(</span><span class="m">0</span>.0001<span class="o">)</span>
+<span class="w">        </span>self.panda.go_to_frame<span class="o">(</span><span class="s1">&#39;task_board_blue_button_link&#39;</span>,<span class="w"> </span><span class="s1">&#39;tool&#39;</span>,<span class="w"> </span>False,<span class="w"> </span><span class="m">0</span>.1<span class="o">)</span>
+<span class="w">        </span>self.panda.go_to_frame<span class="o">(</span><span class="s1">&#39;task_board_blue_button_link&#39;</span>,<span class="w"> </span><span class="s1">&#39;tool&#39;</span>,<span class="w"> </span>False<span class="o">)</span>
+<span class="w">      </span><span class="c1">##########################################################################</span>
+<span class="w">      </span><span class="c1">##########################################################################</span>
+
+<span class="w">      </span><span class="k">else</span>:
+<span class="w">        </span>self.panda.go_to_frame<span class="o">(</span>char<span class="o">[</span><span class="m">0</span><span class="o">]</span>,<span class="w"> </span><span class="s1">&#39;tool&#39;</span>,<span class="w"> </span>char<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span><span class="m">0</span>.1<span class="o">)</span>
+<span class="w">        </span>self.panda.offset_compensator<span class="o">(</span><span class="m">10</span><span class="o">)</span>
+<span class="w">        </span>self.panda.go_to_frame<span class="o">(</span>char<span class="o">[</span><span class="m">0</span><span class="o">]</span>,<span class="w"> </span><span class="s1">&#39;tool&#39;</span>,<span class="w"> </span>char<span class="o">[</span><span class="m">1</span><span class="o">])</span>
+<span class="w">              </span>
+<span class="w">      </span>self.rate.sleep<span class="o">()</span>
+</pre></div>
+</div>
+<p>Dans cette méthode <code class="docutils literal notranslate"><span class="pre">run</span></code> du script “<em>positions.py</em>”, on peut déplacer le robot en fonction de toutes les tâches, à partir des TFs définies au niveau de la task-board (définies physiquement dans son <strong>URDF</strong>). Elle contient une condition permettant au bras de robot Panda d’aller appuyer sur le bouton bleu lorsqu’on saisit <code class="docutils literal notranslate"><span class="pre">blue_button</span></code> dans le terminal. La réalisation de la tâche en question suit ces étapes suivantes :</p>
+<ul class="simple">
+<li><p>Fermeture des pinces au niveau de l’effecteur final (avec la méthode “<code class="docutils literal notranslate"><span class="pre">move_gripper()</span></code>” qui permet de contrôler la distance d’ouverture des pinces en fonction d’un argument qui s’exprime en mètre),</p></li>
+<li><p>Ensuite la TF “<code class="docutils literal notranslate"><span class="pre">tool</span></code>” va se positionner au niveau de la TF du bouton bleu (<code class="docutils literal notranslate"><span class="pre">task_board_blue_button</span></code>), avec une hauteur de 0.1m,</p></li>
+<li><p>Et une fois les deux TFS <code class="docutils literal notranslate"><span class="pre">tool</span></code> et <code class="docutils literal notranslate"><span class="pre">task_board_blue_button</span></code> alignées, l’effecteur finale va descendre appuyer au niveau du bouton, en sachant qu’une elasticité a été définie au niveau de l’effecteur finale pour qu’il évite d’endommager la boîte ou le bouton en appuyant trop fort dessus (donc ici on a un contrôle en position mais aussi en impédance).</p></li>
+</ul>
+</section>
+</section>
+<section id="problemes-rencontrees">
+<h2>Problèmes rencontrées<a class="headerlink" href="#problemes-rencontrees" title="Link to this heading"></a></h2>
+<ul class="simple">
+<div class="blue_button" align="justify">
+<li><p>Stabilisation de SIFT lors de la localisation de la task-board pour avoir une localisation stable au niveau de RVIZ et donc une task-board immobile lorsque la caméra ou le bras de robot n’est pas en mouvement,</p></li>
+<li><p>Un décalage a été perçu entre la simulation sur RVIZ et dans la vraie vie car au moment où le bras de robot aller au-dessus du bouton bleu, dans la simulation, le robot était bien au-dessus du bouton bleu, mais avec un décalage dans la vraie vie. Décalage dû à la calibration de la caméra qui est nécessaire, mais aussi au décalage généré par l’écart entre la TF "<code class="docutils literal notranslate"><span class="pre">box</span></code>" et "<code class="docutils literal notranslate"><span class="pre">task_board_base_link</span></code>",</p></li>
+<li><p>Le contrôle en impédance a été un sujet soulevé pour éviter d’endommager la task-board et pour que l’effecteur finale puisse appuyer suffisamment fort sans dépasser l’effort supporté par le bouton pour que la tâche soit valide.</p></li>
+</div>
+</ul>
+</section>
+<section id="solutions-experimentees">
+<h2>Solutions expérimentées<a class="headerlink" href="#solutions-experimentees" title="Link to this heading"></a></h2>
+<ul class="simple">
+<div class="blue_button" align="justify">
+<li><p>Remplacement de l’image de référence pour la localisation avec SIFT, ce qui nous a permis de stabiliser SIFT au niveau de la visualisation de la task-board sur RVIZ,</p></li>
+<li><p>Calibration de la caméra à l’aide d'un nuage de points pour voir sa profondeur, pour pouvoir positionner correctement la task-board sur RVIZ par rapport sa position réelle par rapport au robot Panda dans le réel :</p>
+<table align="center" cellspacing="10" cellpadding="5" style="width: 100%">
+  <tr>
+      <th>
+        <div class="image">
+        <img src="./img/new/Nuage_points_1.png" />
+        </div>
+      </th>
+  </tr>
+  <tr>
+      <th>
+        <div class="image">
+          <img src="./img/new/Nuage_points_2.png"/>
+      </div>
+      </th>
+  </tr>
+</table>
+<figure class="align-center" id="id3">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Deux points de vue différents avec la task-board et sans, avec l’affichage d’un nuage de points illustrant le champs de vision de la caméra avec sa profondeur.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<br>
+</li>
+<li><p>Repositionnement de la TF de la caméra par rapport à son URDF pour maximiser la précision de la perception (on avait ici un décalage de l’ordre de 5 à 7 cm pour l’objectif de la caméra qui était utilisé),</p></li>
+<li><p>Pour le contrôle en impédance, on a décidé de mettre une raideur au niveau du bras de robot, ce qui permettra d’éviter d’endommager la task-board.</p></li>
+</div>
+</ul>
+</section>
+<section id="video-de-demonstration-de-la-tache">
+<h2>Vidéo de démonstration de la tâche<a class="headerlink" href="#video-de-demonstration-de-la-tache" title="Link to this heading"></a></h2>
+<p>Ci-dessous, vous aviez à disposition la vidéo d’exécution de la tâche du bouton bleu par le bras de robot Panda Franka Emika :</p>
+<table align="center" cellspacing="10" cellpadding="5">
+    <tr>
+        <th>
+            <div class="image">
+            <iframe width="700" height="500" src="https://drive.google.com/file/d/12DmbrsKFBi-u6qnFnmRYRkzS8SCZlfPd/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </th>
+        <th>
+          <div class="image">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Pr4blN5vL-o?si=u5BuzZKbMJCg7fcE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </th>
+    </tr>
+<table>
+<figure class="align-center" id="id4">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Simulation de la tâche du bouton bleu sur RVIZ et avec le robot réel</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table align="center" cellspacing="10" cellpadding="5">
+    <tr>
+        <th>
+            <div class="image">
+            <iframe width="700" height="600" src="https://drive.google.com/file/d/1RULJTtnY2u1hkRpaMECl1Cxq4LBx0Yoy/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </th>
+        <th>
+            <div class="image">
+            <iframe width="700" height="600" src="https://drive.google.com/file/d/1GTtPPw2Bjcq6Urw9RZu8g54OrzitHxg0/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id5">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Simulation de la tâche du bouton bleu avec le robot réel, vu de plus près</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SIFT.html" class="btn btn-neutral float-left" title="Perception de la taskboard avec SIFT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slider.html" class="btn btn-neutral float-right" title="Tâche du slider" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+<jinja2.runtime.BlockReference object at 0x7f6923cd2450>
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

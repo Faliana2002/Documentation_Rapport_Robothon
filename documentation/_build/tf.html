@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Définition de TFs au niveau de l’effecteur final &mdash; Robothon - Polytech Sorbonne 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/isir.css?v=6ef2c474" />
+
+  
+    <link rel="shortcut icon" href="_static/icon-su.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/mermaid_isir.js?v=71f574c8"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation du noyau temps réel" href="installation_RT.html" />
+    <link rel="prev" title="Surcharge de la classe “panda_robothon”" href="surcharge.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Robothon - Polytech Sorbonne
+              <img src="_static/logo-robothon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Projet</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="presentation_projet.html">Présentation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rappel_cdc.html">Rappel du cahier des charges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration matérielle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ressources.html">Ressources réutilisées</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Environnement de développement</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture logiciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surcharge.html">Surcharge de la classe “<em>panda_robothon</em>”</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Définition de TFs au niveau de l’effecteur final</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#les-tfs-definies-au-niveau-de-l-effecteur-final">Les TFs définies au niveau de l’effecteur final</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Installation système et démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_RT.html">Installation du noyau temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller_fci.html">Utilisation du controlleur du robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demarrage.html">Commandes pour exécution des tâches</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Primitives des tâches</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SIFT.html">Perception de la taskboard avec SIFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bouton-bleu.html">Tâche pour le bouton bleu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slider.html">Tâche du slider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connector.html">Tâche de déplacement du connecteur de la sonde</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trappe.html">Tâche de la trappe &amp; sonde (Partie 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonde.html">Tâche de la trappe &amp; sonde (Partie 2)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">A propos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.polytech.sorbonne-universite.fr">Polytech Sorbonne</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.isir.upmc.fr/">ISIR</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge">Robothon Grand Challenge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Robothon - Polytech Sorbonne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Définition de TFs au niveau de l’effecteur final</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tf.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="definition-de-tfs-au-niveau-de-l-effecteur-final">
+<h1>Définition de TFs au niveau de l’effecteur final<a class="headerlink" href="#definition-de-tfs-au-niveau-de-l-effecteur-final" title="Link to this heading"></a></h1>
+<style>
+    .image{
+    border: 5px solid #116aa4;
+    border-radius: 10px;
+    /* padding: 2px; */
+    }
+</style>
+<section id="les-tfs-definies-au-niveau-de-l-effecteur-final">
+<h2>Les TFs définies au niveau de l’effecteur final<a class="headerlink" href="#les-tfs-definies-au-niveau-de-l-effecteur-final" title="Link to this heading"></a></h2>
+<p>Pour faciliter la réalisations de la plupart des tâches complexes, on a décidé de définir des TFs (à l’aide de la fonction <code class="docutils literal notranslate"><span class="pre">tf_static_publisher</span></code> dans le launchfile superviseur “<em>franka_positions.launch</em>”) au niveau de l’effecteur final. Ces TFs sont les suivantes : (à rappeler que l’axe des <strong><span class="redlight">x</span></strong> est représenté en rouge, l’axe des <strong><span class="greenlight">y</span></strong> en vert et l’axe des <strong><span class="bluelight">z</span></strong> en bleu)</p>
+<ul class="simple">
+<li><p>On a défini une première TF au niveau de l’effecteur final qui se placera dans la vraie vie au niveau du bout des deux pinces, pile au milieu des deux grippeurs, la TF en question se nomme : “<code class="docutils literal notranslate"><span class="pre">tool</span></code>”,</p></li>
+</ul>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/tool.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id1">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Position de la TF “<code class="docutils literal notranslate"><span class="pre">tool</span></code>” par rapport à l’effecteur final</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Pour attraper la sonde, on a défini une TF qui s’appelle “<code class="docutils literal notranslate"><span class="pre">tool_probe</span></code>” et qui suit l’inclinaison de la cavité au niveau de la pince pour faciliter non seulement la saisie de la sonde mais aussi pour obtenir une trajectoire optimale pour la récupération de la sonde puis le prélèvement au niveau du capteur situé en dessous la trappe,</p></li>
+</ul>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/tool_probe.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id2">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Position de la TF “<code class="docutils literal notranslate"><span class="pre">tool_probe</span></code>” par rapport à l’effecteur final</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Pour pouvoir agripper correctement le poignée de la trappe pour son ouverture, on a donc aussi créé une TF : “<code class="docutils literal notranslate"><span class="pre">tool_door</span></code>” qui suivra l’angle d’inclinaison de l’évidemment au niveau des deux pinces, passé de 45° à 35° pour améliorer la prise du poignée, mais surtout le relachement lorsque la trappe est bien ouverte et que le bras de robot devra arrếter d’agripper le poignée (pas mal d’essais ont été réalisés pour éviter d’endommager au maximum la task-board mais surtout la trappe),</p></li>
+</ul>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/tool_door.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id3">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Position de la TF “<code class="docutils literal notranslate"><span class="pre">tool_door</span></code>” par rapport à l’effecteur final</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Pour une tâche comme le déplacement du connecteur de la sonde d’un port à un autre, on a défini une TF “<code class="docutils literal notranslate"><span class="pre">tool_opp</span></code>” pour adapter l’orientation de l’effecteur (par rapport aux TFs) par rapport aux différentes orientations de la task-board (qui est aléatoire), pour éviter des positions limites.</p></li>
+</ul>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/tool_opp.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id4">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Position de la TF “<code class="docutils literal notranslate"><span class="pre">tool_opp</span></code>” par rapport à l’effecteur final</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="surcharge.html" class="btn btn-neutral float-left" title="Surcharge de la classe “panda_robothon”" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation_RT.html" class="btn btn-neutral float-right" title="Installation du noyau temps réel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+<jinja2.runtime.BlockReference object at 0x7f692375eed0>
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

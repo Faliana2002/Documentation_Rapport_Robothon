@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surcharge de la classe “panda_robothon” &mdash; Robothon - Polytech Sorbonne 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/isir.css?v=6ef2c474" />
+
+  
+    <link rel="shortcut icon" href="_static/icon-su.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/mermaid_isir.js?v=71f574c8"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Définition de TFs au niveau de l’effecteur final" href="tf.html" />
+    <link rel="prev" title="Architecture logiciel" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Robothon - Polytech Sorbonne
+              <img src="_static/logo-robothon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Projet</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="presentation_projet.html">Présentation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rappel_cdc.html">Rappel du cahier des charges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration matérielle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ressources.html">Ressources réutilisées</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Environnement de développement</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture logiciel</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Surcharge de la classe “<em>panda_robothon</em>”</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#methodes-modifiees">Méthodes modifiées</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#methode-home-permettant-au-robot-d-aller-a-un-z-donne-avec-x-y-0">Méthode “<em>home</em>” permettant au robot d’aller à un “<em>z</em>” donné avec x,y = 0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methodes-utilisees-pour-le-deplacement-de-l-effecteur-final">Méthodes utilisées pour le déplacement de l’effecteur final</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details-sur-la-methode-offset-compensator">Détails sur la méthode “<em>offset_compensator</em>”</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tf.html">Définition de TFs au niveau de l’effecteur final</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Installation système et démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_RT.html">Installation du noyau temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller_fci.html">Utilisation du controlleur du robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demarrage.html">Commandes pour exécution des tâches</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Primitives des tâches</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SIFT.html">Perception de la taskboard avec SIFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bouton-bleu.html">Tâche pour le bouton bleu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slider.html">Tâche du slider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connector.html">Tâche de déplacement du connecteur de la sonde</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trappe.html">Tâche de la trappe &amp; sonde (Partie 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonde.html">Tâche de la trappe &amp; sonde (Partie 2)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">A propos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.polytech.sorbonne-universite.fr">Polytech Sorbonne</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.isir.upmc.fr/">ISIR</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge">Robothon Grand Challenge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Robothon - Polytech Sorbonne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Surcharge de la classe “<em>panda_robothon</em>”</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/surcharge.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="surcharge-de-la-classe-panda-robothon">
+<h1>Surcharge de la classe “<em>panda_robothon</em>”<a class="headerlink" href="#surcharge-de-la-classe-panda-robothon" title="Link to this heading"></a></h1>
+<style>
+  .image{
+  border: 5px solid #116aa4;
+  border-radius: 10px;
+  /* padding: 2px; */
+  }
+
+  .redlight {
+    font-size: 18px;
+    color: red;
+  }
+
+  .greenlight {
+    font-size: 18px;
+    color: green;
+  }
+
+  .bluelight {
+    font-size: 18px;
+    color: blue;
+  }
+
+</style>
+<section id="methodes-modifiees">
+<h2>Méthodes modifiées<a class="headerlink" href="#methodes-modifiees" title="Link to this heading"></a></h2>
+<section id="methode-home-permettant-au-robot-d-aller-a-un-z-donne-avec-x-y-0">
+<h3>Méthode “<em>home</em>” permettant au robot d’aller à un “<em>z</em>” donné avec x,y = 0<a class="headerlink" href="#methode-home-permettant-au-robot-d-aller-a-un-z-donne-avec-x-y-0" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>class<span class="w"> </span>Panda_R<span class="o">(</span>Panda<span class="o">)</span>:
+<span class="w">    </span>def<span class="w"> </span>__init__<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">        </span>super<span class="o">()</span>.__init__<span class="o">()</span>
+<span class="w">        </span>self.listener<span class="w"> </span><span class="o">=</span><span class="w"> </span>tf.TransformListener<span class="o">()</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1"># Méthode permettant de placer l&#39;effecteur final à une hauteur de 0.25m </span>
+<span class="w">    </span><span class="c1"># par défaut (mais ci-dessous, saisir dans le terminal &quot;home&quot; le place à 0.5m)</span>
+
+<span class="w">    </span>def<span class="w"> </span>home<span class="o">(</span>self,<span class="w"> </span><span class="nv">z</span><span class="o">=</span><span class="m">0</span>.25<span class="o">)</span>:
+<span class="w">        </span><span class="nv">pos_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span><span class="m">0</span>.4,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>z<span class="o">])</span>
+<span class="w">        </span><span class="nv">quat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.quaternion<span class="o">(</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">goal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>array_quat_2_pose<span class="o">(</span>pos_array,<span class="w"> </span>quat<span class="o">)</span>
+<span class="w">        </span>goal.header.seq<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="w">        </span>goal.header.stamp<span class="w"> </span><span class="o">=</span><span class="w"> </span>rospy.Time.now<span class="o">()</span>
+
+<span class="w">        </span><span class="nv">ns_msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>-2.4,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="m">2</span>.4,<span class="w"> </span><span class="m">0</span><span class="o">]</span>
+<span class="w">        </span>self.go_to_pose<span class="o">(</span>goal<span class="o">)</span>
+<span class="w">        </span>self.set_configuration<span class="o">(</span>ns_msg<span class="o">)</span>
+<span class="w">        </span>self.set_K.update_configuration<span class="o">({</span><span class="s2">&quot;nullspace_stiffness&quot;</span>:10<span class="o">})</span>
+
+<span class="w">        </span>rospy.sleep<span class="o">(</span>rospy.Duration<span class="o">(</span><span class="nv">secs</span><span class="o">=</span><span class="m">1</span><span class="o">))</span>
+
+<span class="w">        </span>self.set_K.update_configuration<span class="o">({</span><span class="s2">&quot;nullspace_stiffness&quot;</span>:0<span class="o">})</span>
+</pre></div>
+</div>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/home.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id1">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Positionnement de l’effecteur final à 0.5m</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Dans le terminal, on aura à saisir "<i>home</i>" après "Position :"</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>Position<span class="w"> </span>:<span class="w"> </span>home
+</pre></div>
+</div>
+<br>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/home2.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id2">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Positionnement de l’effecteur final à 0.25m</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Dans le terminal, on aura à saisir "<i>home2</i>" après "Position :"</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>Position<span class="w"> </span>:<span class="w"> </span>home2
+</pre></div>
+</div>
+</section>
+<section id="methodes-utilisees-pour-le-deplacement-de-l-effecteur-final">
+<h3>Méthodes utilisées pour le déplacement de l’effecteur final<a class="headerlink" href="#methodes-utilisees-pour-le-deplacement-de-l-effecteur-final" title="Link to this heading"></a></h3>
+<div class="surcharge" align="justify">
+<ul class="simple">
+<li><p>La méthode “<code class="docutils literal notranslate"><span class="pre">get_tf_transform(self,</span> <span class="pre">parent,</span> <span class="pre">child)</span></code>” permet d’obtenir la transformation entre les TFs <code class="docutils literal notranslate"><span class="pre">parent</span></code> et la TF <code class="docutils literal notranslate"><span class="pre">child</span></code>.</p></li>
+<li><p>La méthode “<code class="docutils literal notranslate"><span class="pre">get_transform_pose(self,</span> <span class="pre">origin,</span> <span class="pre">target,</span> <span class="pre">pose=None)</span></code>” transforme une “<em>pose</em>” (composée d’une orientation et d’une position selon les 3 axes x, y et z) d’un repère “<em>origin</em>” à un repère ou une <code class="docutils literal notranslate"><span class="pre">frame</span></code> dite “<em>cible</em>”.</p></li>
+<li><p>La méthode “<code class="docutils literal notranslate"><span class="pre">get_to_pose_EE(self)</span></code>” permet d’obtenir la pose de l’effecteur final (”<code class="docutils literal notranslate"><span class="pre">End-Effector</span></code>” ou <em>EE</em>) du robot en convertissant la position et l’orientation actuelles en un message de pose et le retourne.</p></li>
+<li><p>La méthode “<code class="docutils literal notranslate"><span class="pre">go_to_pose_EE(self,</span> <span class="pre">pose)</span></code>” permet de déplacer l’effecteur final à une position donnée (en termes de position selon les axes x, y et z) en fonction de la variable pose de type <code class="docutils literal notranslate"><span class="pre">PoseStamped</span></code>.</p></li>
+<li><p>La méthode “<code class="docutils literal notranslate"><span class="pre">go_to_tool_pose(self,</span> <span class="pre">pose,</span> <span class="pre">tool)</span></code>” permet de déplacer la TF <code class="docutils literal notranslate"><span class="pre">tool</span></code> à la position pose de type <code class="docutils literal notranslate"><span class="pre">PoseStamped</span></code>, en faisant la transformation entre les TFs <code class="docutils literal notranslate"><span class="pre">panda_link0</span></code> et <code class="docutils literal notranslate"><span class="pre">tool</span></code> avec la TF de l’effecteur final <code class="docutils literal notranslate"><span class="pre">panda_EE</span></code>.</p></li>
+<li><p>La méthode “<code class="docutils literal notranslate"><span class="pre">go_to_frame(self,</span> <span class="pre">frame,</span> <span class="pre">tool,</span> <span class="pre">orientation=True)</span></code>” permet de déplacer le bras de robot Panda de la TF <code class="docutils literal notranslate"><span class="pre">tool</span></code> à la TF frame en passant par la transformation entre la TF de la base du robot <code class="docutils literal notranslate"><span class="pre">panda_link0</span></code> et la TF frame.</p></li>
+<li><p>La méthode “<code class="docutils literal notranslate"><span class="pre">play_trajectory(self,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code>” permet de faire suivre une trajectoire au robot en interpolant entre des positions successives en définissant un taux de publication, et en récupérant les positions et orientations actuelles, et pour chaque position de la trajectoire, on calcule et on publie la pose cible à atteindre.</p></li>
+</ul>
+</div>  
+</section>
+<section id="details-sur-la-methode-offset-compensator">
+<h3>Détails sur la méthode “<em>offset_compensator</em>”<a class="headerlink" href="#details-sur-la-methode-offset-compensator" title="Link to this heading"></a></h3>
+<p>Pour compenser ou ajuster l’orientation ou encore la position de l’effecteur final, on a dû rajouter une méthode permettant d’ajuster ce décalage qui a été visible entre la simulation sur RVIZ avec la position des différents TFs par rapport à l’effecteur final du bras de robot, et à la simulation réel où on voyait les décalages lors des déplacements vers les repères en question (exemple <code class="docutils literal notranslate"><span class="pre">task_board_blue_button_link</span></code>) :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>def<span class="w"> </span>offset_compensator<span class="o">(</span>self,<span class="w"> </span>steps<span class="o">)</span>:
+<span class="w">  </span><span class="c1"># Initialisation des variables de position et d&#39;orientation désirées</span>
+<span class="w">  </span><span class="nv">curr_quat_desired</span><span class="o">=</span><span class="w"> </span>list_2_quaternion<span class="o">(</span>np.copy<span class="o">(</span>self.curr_ori_goal<span class="o">))</span>
+<span class="w">  </span><span class="nv">curr_pos_desired</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.copy<span class="o">(</span>self.curr_pos_goal<span class="w"> </span><span class="o">)</span>
+
+<span class="w">  </span><span class="c1"># Boucle pour le nombre de &quot;pas&quot; spécifié</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span>_<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>steps<span class="o">)</span>:
+
+<span class="w">    </span><span class="c1"># Récupération des positions et orientations actuelles et désirées</span>
+<span class="w">    </span><span class="nv">curr_quat_goal</span><span class="o">=</span><span class="w"> </span>list_2_quaternion<span class="o">(</span>self.curr_ori_goal<span class="o">)</span>
+<span class="w">    </span><span class="nv">curr_pos_goal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.curr_pos_goal<span class="w"> </span>
+<span class="w">    </span><span class="nv">curr_quat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>list_2_quaternion<span class="o">(</span>self.curr_ori<span class="o">)</span><span class="w">    </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1"># Calcul des différences linéaires et angulaires</span>
+<span class="w">    </span><span class="nv">quat_diff</span><span class="o">=</span><span class="w"> </span>np.divide<span class="o">(</span><span class="w"> </span>curr_quat_desired,<span class="w"> </span>curr_quat<span class="o">)</span><span class="w"> </span>
+<span class="w">    </span><span class="nv">lin_diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>curr_pos_desired<span class="w"> </span>-<span class="w"> </span>self.curr_pos<span class="w"> </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1"># Calcul des nouvelles cibles pour la position et l&#39;orientation</span>
+<span class="w">    </span><span class="nv">quat_goal_new</span><span class="o">=</span><span class="w"> </span>np.multiply<span class="o">(</span>quat_diff,<span class="w"> </span>curr_quat_goal<span class="o">)</span>
+<span class="w">    </span><span class="nv">goal_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>curr_pos_goal<span class="w"> </span>+<span class="w"> </span>lin_diff
+<span class="w">    </span>
+<span class="w">    </span><span class="c1"># Conversion de la position et de l&#39;orientation en une pose et publication</span>
+<span class="w">    </span><span class="nv">goal_pose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>array_quat_2_pose<span class="o">(</span>goal_pos,<span class="w"> </span>quat_goal_new<span class="o">)</span>
+<span class="w">    </span>self.goal_pub.publish<span class="o">(</span>goal_pose<span class="o">)</span>
+<span class="w">    </span>rospy.sleep<span class="o">(</span><span class="m">0</span>.2<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Architecture logiciel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tf.html" class="btn btn-neutral float-right" title="Définition de TFs au niveau de l’effecteur final" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+<jinja2.runtime.BlockReference object at 0x7f6923937050>
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

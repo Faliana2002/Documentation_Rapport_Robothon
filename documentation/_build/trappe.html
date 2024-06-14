@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tâche de la trappe &amp; sonde (Partie 1) &mdash; Robothon - Polytech Sorbonne 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/isir.css?v=6ef2c474" />
+
+  
+    <link rel="shortcut icon" href="_static/icon-su.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/mermaid_isir.js?v=71f574c8"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tâche de la trappe &amp; sonde (Partie 2)" href="sonde.html" />
+    <link rel="prev" title="Tâche de déplacement du connecteur de la sonde" href="connector.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Robothon - Polytech Sorbonne
+              <img src="_static/logo-robothon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Projet</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="presentation_projet.html">Présentation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rappel_cdc.html">Rappel du cahier des charges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration matérielle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ressources.html">Ressources réutilisées</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Environnement de développement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture logiciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surcharge.html">Surcharge de la classe “<em>panda_robothon</em>”</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tf.html">Définition de TFs au niveau de l’effecteur final</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Installation système et démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_RT.html">Installation du noyau temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller_fci.html">Utilisation du controlleur du robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demarrage.html">Commandes pour exécution des tâches</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Primitives des tâches</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SIFT.html">Perception de la taskboard avec SIFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bouton-bleu.html">Tâche pour le bouton bleu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slider.html">Tâche du slider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connector.html">Tâche de déplacement du connecteur de la sonde</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tâche de la trappe &amp; sonde (Partie 1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#point-d-approche">Point d’approche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-implemente">Code implémenté</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#video-de-demonstration-de-la-tache">Vidéo de démonstration de la tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#probleme-rencontre">Problème rencontré</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mode-d-emploi">Mode d’emploi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sonde.html">Tâche de la trappe &amp; sonde (Partie 2)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">A propos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.polytech.sorbonne-universite.fr">Polytech Sorbonne</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.isir.upmc.fr/">ISIR</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge">Robothon Grand Challenge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Robothon - Polytech Sorbonne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tâche de la trappe &amp; sonde (Partie 1)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/trappe.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tache-de-la-trappe-sonde-partie-1">
+<h1>Tâche de la trappe &amp; sonde (Partie 1)<a class="headerlink" href="#tache-de-la-trappe-sonde-partie-1" title="Link to this heading"></a></h1>
+<p>La première partie de cette tâche consiste à ouvrir la trappe de la taskboard sachant que celle-ci dispose d’une petite poignée circulaire.</p>
+<style>
+    .image
+    {
+        border: 5px solid #116aa4;
+        border-raduis: 10px;
+    }
+</style>
+<table align="center">
+    <tr>
+        <th>
+        <div class="image">
+            <img src="./img/trappe.png"/>
+        </div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id1">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Aperçu de la trappe et poignée sur la task-board</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="point-d-approche">
+<h2>Point d’approche<a class="headerlink" href="#point-d-approche" title="Link to this heading"></a></h2>
+<p>Pour mener à bien cette tâche, au vu de l’état de l’art réalisé en amont, différentes solutions pouvaient être mise en place et envisagée, comme par exemple : utiliser directement la pointe la sonde après l’avoir retirer de son port pour venir ouvrir la trappe ou bien plus simplement par le biais de la pince au bout du gripper.
+On a finalement décidé d’écarter la solution d’ouverture avec la pointe de la sonde qui nécessitait une assez grande précision à la fois pour bien se placer au niveau de la fente entre la trappe et la surface supérieure de la task-board pour éviter les mauvaises manipulations qui pourraient endommager le matériel.
+Ainsi, pour attrapper la poignéé de la porte et réaliser l’ouverture de la trappe, on se base ici sur les différentes TF intégrées dans le fichier <code class="docutils literal notranslate"><span class="pre">task_board.urdf</span></code> et notamment celles qui nous seront utile, c’est-à-dire “task_board_door_handle_link” et d’une TF statique “tool” correspondante à la pince, comme le montre l’image ci-contre:</p>
+<table align="center" cellspacing="10" cellpadding="5">
+    <tr>
+        <th>
+        <div class="image">
+            <img src="./img/task_board_door_handle_link.png"/>
+        </div>
+        </th>
+        <th>
+        <div class="image">
+            <img src="./img/TF_tool_trappe.png"/>
+        </div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id2">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 61 </span><span class="caption-text">TF de la task_board_door_handle_link et tool</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="code-implemente">
+<h2>Code implémenté<a class="headerlink" href="#code-implemente" title="Link to this heading"></a></h2>
+<p>Le script pyhton <code class="docutils literal notranslate"><span class="pre">trappe.py</span></code> développé ici importe la surcharge de la classe Panda et c’est différentes méthodes liées au contrôle, mouvement et trajectoire du bras robot. Voici les étapes successives mises en oeuvre pour effectuer cette tâche :</p>
+<ul class="simple">
+<li><p>Tout d’abord, on commence par faire un appel à la méthode <code class="docutils literal notranslate"><span class="pre">go_to_frame</span></code> pour placer l’End Effector du robot au niveau de la poignée de la trappe et en procédant à la fermeture de la pince</p></li>
+<li><p>Ensuite, on initialise un tableau de valeur d’angle qui va contenir l’ensemble des angles  successifs de la trajectoire circulaire tout en définissant le point autour duquel celui-ci va être réalisé pour procéder à l’ouverture de la trappe en initialisant une variable de type <code class="docutils literal notranslate"><span class="pre">PoseStamped</span></code>. Cette variable va par la suite être utilisée pour réaliser un changement de repère en passant de <code class="docutils literal notranslate"><span class="pre">panda_link0</span></code> à <code class="docutils literal notranslate"><span class="pre">task_board_door_hanfle_link</span></code> à l’aide de la méthode <code class="docutils literal notranslate"><span class="pre">get_transform_pose</span></code> et donc réaliser la trajectoire circulaire dans le repère de la trappe. Pour résumer, cette étape permet de préparer le robot pour manipuler la poignée de la trappe en ajustant une position de référence autour de laquelle effectuer la trajectoire circulaire.</p></li>
+<li><p>Une fois les différents éléments mis en place, on procède à l’interpolation de la trajectoire circulaire voulu par des formules mathématiques de trigonométrie d’un cercle, puis on vient les stocker dans des tableaux de valeurs x, y et z.</p></li>
+<li><p>Finalement, la trajectoire est jouée grâce à la méthode <code class="docutils literal notranslate"><span class="pre">play_trajectory</span></code> en spécifiant en arguments les tableaux de valeurs x, y et z définis et complétés précédemment.
+En complément de cela, on utilise les méthodes <code class="docutils literal notranslate"><span class="pre">move_gripper</span></code> et <code class="docutils literal notranslate"><span class="pre">grasp_gripper</span></code> pour l’ouverture et la fermeture du gripper au bon moment au niveau de la saisie de la poignée de la trappe et à la fin de l’ouverture de la trappe.</p></li>
+</ul>
+</section>
+<section id="video-de-demonstration-de-la-tache">
+<h2>Vidéo de démonstration de la tâche<a class="headerlink" href="#video-de-demonstration-de-la-tache" title="Link to this heading"></a></h2>
+<p>Voici, un aperçu du résultat obtenu :</p>
+<table align="center" cellspacing="10" cellpadding="5">
+    <tr>
+        <th>
+            <div class="image">
+            <iframe width="700" height="600" src="https://drive.google.com/file/d/1KBu7pz3RlvSMA3S5E7F3fDo0CSZ_EgRs/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </th>
+        <th>
+            <div class="image">
+            <iframe width="700" height="600" src="https://drive.google.com/file/d/1_XLY4vAW6Nl6Hj2ZuWd-VnLHYXU9j9nX/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </th>
+    </tr>
+</table>
+<table align="center">
+    <tr>
+        <th>
+            <div class="image">
+            <iframe width="700" height="600" src="https://drive.google.com/file/d/1Su7MCmiW78S82v6dwqasUdwLzUAno0r0/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id3">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Vidéo d’exécution de la tâche de la trappe</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="probleme-rencontre">
+<h2>Problème rencontré<a class="headerlink" href="#probleme-rencontre" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Quelques petits décalages on pu être réglé et notamment au niveau de la hauteur en z étant donné que lors des premiers essaies en simulation, le bras faisait un mouvement brusque vers l’avant en passant à travers la trappe de la task bard.
+Ainsi, pour résoudre ce problème qui intervenait dans la plannification de la trajectoire, on a réadapté certaines méthodes issues de la surchage de la classe Panda pour éviter ce problème.</p></li>
+<li><p>Cependant, un deuxième obstacle dans la réalisation de cette tâche résidait dans le grippage de la pougnée de la trappe qui de part ça forme circulaire n’est pas évidente à attraper et maintenir stable à la même position tout au long de l’interpolation circulaire pour ourvir la trappe, ce qui causait un léger glissement du poignée le long de la pince.</p></li>
+</ul>
+</section>
+<section id="mode-d-emploi">
+<h2>Mode d’emploi<a class="headerlink" href="#mode-d-emploi" title="Link to this heading"></a></h2>
+<p>Ligne de commande à entrer dans le terminal pour exécuter cette tâche :</p>
+<ul class="simple">
+<li><p>Launchfile superviseur permettant d’indiquer une position cible au Panda :</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>roslaunch<span class="w"> </span>trajectory<span class="w"> </span>franka_positions.launch
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Launchfile implémentant le code permettant de réaliser la tâche spécifique de la trappe :
+Ligne de commande à entrer dans le terminal pour exécuter cette tâche :</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>roslaunch<span class="w"> </span>trajectory<span class="w"> </span>trappe.py
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="connector.html" class="btn btn-neutral float-left" title="Tâche de déplacement du connecteur de la sonde" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sonde.html" class="btn btn-neutral float-right" title="Tâche de la trappe &amp; sonde (Partie 2)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+<jinja2.runtime.BlockReference object at 0x7f6923639690>
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

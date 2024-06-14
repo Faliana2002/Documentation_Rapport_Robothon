@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ressources réutilisées &mdash; Robothon - Polytech Sorbonne 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/isir.css?v=6ef2c474" />
+
+  
+    <link rel="shortcut icon" href="_static/icon-su.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/mermaid_isir.js?v=71f574c8"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Architecture logiciel" href="architecture.html" />
+    <link rel="prev" title="Configuration matérielle" href="configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Robothon - Polytech Sorbonne
+              <img src="_static/logo-robothon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Projet</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="presentation_projet.html">Présentation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rappel_cdc.html">Rappel du cahier des charges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration matérielle</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ressources réutilisées</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ressources">Ressources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resume-de-l-etat-de-l-art">Résumé de l’état de l’art</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-elements-tires-de-l-equipe-upcyclers">Les éléments tirés de l’équipe Upcyclers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modele-3d-de-pince-adaptee-aux-differentes-taches">Modèle 3D de pince adaptée aux différentes tâches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utilisation-du-modele-3d-de-la-task-board-l-urdf-de-la-boite">Utilisation du modéle 3D de la task-board (l’URDF de la boîte)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#les-elements-tires-de-l-equipe-platonics">Les éléments tirés de l’équipe Platonics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ressources-bien-documentees">Ressources bien documentées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#les-differents-packages-exploites">Les différents packages exploités</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Environnement de développement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture logiciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surcharge.html">Surcharge de la classe “<em>panda_robothon</em>”</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tf.html">Définition de TFs au niveau de l’effecteur final</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Installation système et démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_RT.html">Installation du noyau temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller_fci.html">Utilisation du controlleur du robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demarrage.html">Commandes pour exécution des tâches</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Primitives des tâches</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SIFT.html">Perception de la taskboard avec SIFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bouton-bleu.html">Tâche pour le bouton bleu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slider.html">Tâche du slider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connector.html">Tâche de déplacement du connecteur de la sonde</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trappe.html">Tâche de la trappe &amp; sonde (Partie 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonde.html">Tâche de la trappe &amp; sonde (Partie 2)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">A propos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.polytech.sorbonne-universite.fr">Polytech Sorbonne</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.isir.upmc.fr/">ISIR</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge">Robothon Grand Challenge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Robothon - Polytech Sorbonne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Ressources réutilisées</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ressources.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ressources-reutilisees">
+<h1>Ressources réutilisées<a class="headerlink" href="#ressources-reutilisees" title="Link to this heading"></a></h1>
+<section id="approche-pour-mener-a-bien-le-projet">
+<style>
+    .image{
+    border: 5px solid #116aa4;
+    border-radius: 10px;
+    /* padding: 2px; */
+    }
+</style>
+<section id="ressources">
+<h2>Ressources<a class="headerlink" href="#ressources" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge?tab=readme-ov-file">https://github.com/peterso/robothon-grand-challenge?tab=readme-ov-file</a></p></li>
+<li><p><a class="reference external" href="https://automatica-munich.com/en/munich-i/robothon/">https://automatica-munich.com/en/munich-i/robothon/</a></p></li>
+<li><p><a class="reference external" href="https://wiki.ros.org/">https://wiki.ros.org/</a></p></li>
+</ul>
+</section>
+<section id="resume-de-l-etat-de-l-art">
+<h2>Résumé de l’état de l’art<a class="headerlink" href="#resume-de-l-etat-de-l-art" title="Link to this heading"></a></h2>
+<div class="approche" align="justify">
+<ul class="simple">
+<li><p>Ce projet industriel a été pour nous une opportunité d’aprendre à utiliser une plateforme telle que Docker pour faciliter l’organisation du travail dans une équipe, mais aussi pour nous familiariser avec l’OS Linux, et être habitué à l’utilisation du terminale pour l’exécution et la compilation de programmes, mais aussi la découverte d’un nouvel outil, très intéressant et assez important dans la robotique car la majorité des systèmes robotisés l’utilise (on parle ici de ROS).</p></li>
+<li><p>Comme il s’agit d’une découverte, on a passé une bonne partie de notre temps à se documenter et à apprendre. Pour mener à bien le projet, on s’est basé sur les différentes solutions développées par les équipes des éditions précédentes de la compétition Robothon, pour s’y inspirer, en prenant les bonnes solutions, en apprenant de leurs erreurs et en optimisant les raisonnements.</p></li>
+<li><p>Au niveau de la réalisation de l’état de l’art, on s’est départagé la tâche en 4, en sachant que chacun d’entre nous étudiait les solutions utilisées, ainsi que les différentes méthodes appliquées pour la perception et la planification de trajectoires, par 4 équipes de l’édition 2023 (en sachant qu’ils étaient 16 à avoir participé).</p></li>
+</ul>
+</div>
+<table align="center" cellspacing="10" cellpadding="5" style="width: 70%">
+    <tr>
+        <th>
+            <div class="image"><img src="./img/new/Equip_16.png"/></div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id1">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Aperçu des 16 équipes de l’édition précédente 2023</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="les-elements-tires-de-l-equipe-upcyclers">
+<h2>Les éléments tirés de l’équipe Upcyclers<a class="headerlink" href="#les-elements-tires-de-l-equipe-upcyclers" title="Link to this heading"></a></h2>
+<section id="modele-3d-de-pince-adaptee-aux-differentes-taches">
+<h3>Modèle 3D de pince adaptée aux différentes tâches<a class="headerlink" href="#modele-3d-de-pince-adaptee-aux-differentes-taches" title="Link to this heading"></a></h3>
+<div class="approche" align="justify">
+<ul class="simple">
+<li><p>Au niveau de la conception d’un préhenseur, on a décidé de réutiliser directement des pinces modélisees par l’équipe “Upcyclers” (ils ont terminé 7ème dans le classement) dans la compétition car on n’a spécialement estimé l’intérêt de modéliser et concevoir un préhenseur entier pour l’exécution des différentes tâches en sachant que ce n’était pas la partie la plus complexe du projet en question. La pince en question est adaptée à pratiquement toutes les tâches comme celle de la sonde car l’évidemment intérieur est adapté à la taille de la sonde, mais aussi pour la saisie du port de la sonde, ainsi pour l’appui sur les bouton car le bout de la pince permet d’avoir une zone de contact réduite mais suffisante. On a juste réadapté l’angle d’orientation de la cavité au centre en passant de 45° à 35°.</p></li>
+</ul>
+</div>
+<table align="center" cellspacing="10" cellpadding="5" style="width: 70%">
+    <tr>
+        <th>
+            <div class="image"><img src="./img/new/Upcyclers.png"/></div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id2">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Aperçu de la page github avec le README de l’équipe Upcylers, avec le modèle 3D de la pince</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="utilisation-du-modele-3d-de-la-task-board-l-urdf-de-la-boite">
+<h3>Utilisation du modéle 3D de la task-board (l’URDF de la boîte)<a class="headerlink" href="#utilisation-du-modele-3d-de-la-task-board-l-urdf-de-la-boite" title="Link to this heading"></a></h3>
+<div class="approche" align="justify">
+<ul class="simple">
+<li><p>Pour pouvoir avoir une simulation plus réaliste, on a décidé d’importer un modèle 3D de la task-board sur RVIZ pour pouvoir simuler correctement les mouvements du bras de robot en fonction du positionnement de la task-board par rapport à la base du robot Panda (la base étant repéré par la TF “<code class="docutils literal notranslate"><span class="pre">panda_link_0</span></code>”). Dans cette optique, on a donc repris l’URDF de la task-board développé par cette équipe de l’édition précédente de la compétition (Upcyclers) et on l’a adapté en fonction de nos exigences et de nos différentes méthodes pour réussir chacune des tâches (on parle ici de redéfinition des TFs, modification des différentes composantes physique de la task-board pour l’adapter correctement à la version réelle de la boîte, plus de détailn dans la section suivante où nous parlerons en détail de tous les repères redéfinis au niveau de l’effecteur finale pour faciliter la réalisation de certaines tâches comme celui de la sonde ou encore celui de la trappe).</p></li>
+</ul>
+</div>
+<table align="center" cellspacing="10" cellpadding="5" style="width: 100%">
+    <tr>
+        <th>
+            <div class="image"><img src="./img/new/task_board_vue_haut.png"/></div>
+        </th>
+        <th>
+            <div class="image"><img src="./img/new/task_board_incline.png"/></div>
+        </th>
+    </tr>
+</table>
+<table align="center" style="width: 50%">
+    <tr>
+        <th>
+            <div class="image"><img src="./img/new/task_board_incline_1.png"/></div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id3">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Aperçu de la page github avec le README de l’équipe Upcylers, avec le modèle 3D de la pince</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="les-elements-tires-de-l-equipe-platonics">
+<h2>Les éléments tirés de l’équipe Platonics<a class="headerlink" href="#les-elements-tires-de-l-equipe-platonics" title="Link to this heading"></a></h2>
+<section id="ressources-bien-documentees">
+<h3>Ressources bien documentées<a class="headerlink" href="#ressources-bien-documentees" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A travers 3 éditions, on a pu remarquer que l’équipe de “<strong>Platonics</strong>”, dont les codes et modules étaient les mieux documentés et rendus open-source à 100%, avait développé des solution très intéressantes, qu’on a pas mal utilisé comme base pour les différentes tâches à accomplir comme la localisation de la task-board avec SIFT.</p></li>
+<li><p>Pour le contrôle du robot, comme on a décidé de ne pas utiliser “<em>moveit</em>” pour la planification de trajectoires, on s’est donc inspiré du controller qui a été développé par “<strong>Platonics</strong>” pour développer des méthodes permettant au robot d’aller facilement à des positions précis ou avoir la transformation entre deux repères pour permettre au robot d’aller au niveau du repère.</p></li>
+<li><p>On a donc eu un premier aperçu des différents codes développés par chaque avec leurs avantages et les inconvénients en fonction des méthodes. En fonction du matériel qui a été à notre disposition (principalement un bras de robot Panda Franka Emika et une caméra Intel RealSense D435i), on a pu s’inspirer et réutiliser les modules et codes développés par l’une des équipes qui a terminé 8ème dans la compétition “<em>Platonics</em>”.</p></li>
+</ul>
+<table align="center" cellspacing="10" cellpadding="5" style="width: 70%">
+    <tr>
+        <th>
+            <div class="image"><img src="./img/new/Platonics.png"/></div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id4">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Aperçu de la page github avec le README de l’équipe Platonics</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="les-differents-packages-exploites">
+<h3>Les différents packages exploités<a class="headerlink" href="#les-differents-packages-exploites" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>“<code class="docutils literal notranslate"><span class="pre">panda-ros-py</span></code>” contenant le script <a class="reference external" href="https://github.com/platonics-delft/panda-ros-py/tree/main/panda_ros">panda.py</a>,</p></li>
+<li><p>“<code class="docutils literal notranslate"><span class="pre">object_localization</span></code>” contenant les deux scripts nécessaires pour la localisation de la task-board avec SIFT (plus de détails sur le sujet sur cette <a class="reference internal" href="SIFT.html">page</a>),</p></li>
+<li><p>“<code class="docutils literal notranslate"><span class="pre">franka_impedance_controllers</span></code>”, qui nous a permis de tester pour la première fois, la commande en téléopération du robot Panda Franka Emika à l’aide de marqueurs interactifs, qui nous a permis de comprendre comment relier la simulation sur RVIZ avec le déplacement réel du robot à travers divers launchfile. On a pu obtenir le rendu suivant avec les marqueurs au niveau de l’effecteur finale de la task-board :</p></li>
+</ul>
+<table align="center">
+    <tr>
+        <th>
+            <div class="image"><img src="./img/new/interactive_marker.png"/></div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id5">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Simulation sur RVIZ avec les marqueurs interactifs</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Plus de détails sur la surcharge de la classe “<em>panda_robothon</em>” seront donnés sur cette <a class="reference internal" href="surcharge.html">page</a>.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="configuration.html" class="btn btn-neutral float-left" title="Configuration matérielle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="architecture.html" class="btn btn-neutral float-right" title="Architecture logiciel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+<jinja2.runtime.BlockReference object at 0x7f69237bafd0>
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tâche du slider &mdash; Robothon - Polytech Sorbonne 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/css/isir.css?v=6ef2c474" />
+
+  
+    <link rel="shortcut icon" href="_static/icon-su.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/mermaid_isir.js?v=71f574c8"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tâche de déplacement du connecteur de la sonde" href="connector.html" />
+    <link rel="prev" title="Tâche pour le bouton bleu" href="bouton-bleu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Robothon - Polytech Sorbonne
+              <img src="_static/logo-robothon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Projet</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="presentation_projet.html">Présentation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rappel_cdc.html">Rappel du cahier des charges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration matérielle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ressources.html">Ressources réutilisées</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Environnement de développement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture logiciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surcharge.html">Surcharge de la classe “<em>panda_robothon</em>”</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tf.html">Définition de TFs au niveau de l’effecteur final</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Installation système et démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_RT.html">Installation du noyau temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller_fci.html">Utilisation du controlleur du robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demarrage.html">Commandes pour exécution des tâches</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Primitives des tâches</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SIFT.html">Perception de la taskboard avec SIFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bouton-bleu.html">Tâche pour le bouton bleu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tâche du slider</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#objectifs">Objectifs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#positionnement-de-leffecteur-final-au-niveau-du-slider">Positionnement de l’effecteur final au niveau du slider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alignement-des-triangles-au-niveau-de-lecran">Alignement des triangles au niveau de l’écran</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#organisation-des-codes-et-des-programmes-pour-le-traitement-dimage-et-le-deplacement-du-robot">Organisation des codes et des programmes pour le traitement d’image et le déplacement du robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-sur-rviz">Simulation sur RVIZ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#methode-de-traitement-dimage-pour-distinguer-les-trois-triangles-rouge-vert-et-jaune">Méthode de traitement d’image pour distinguer les trois triangles (rouge, vert et jaune)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lancement-pour-la-tache-du-slider-introduit-dans-le-superviseur">Lancement pour la tâche du slider, introduit dans le superviseur</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#video-de-demonstration-de-la-tache">Vidéo de démonstration de la tâche</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connector.html">Tâche de déplacement du connecteur de la sonde</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trappe.html">Tâche de la trappe &amp; sonde (Partie 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonde.html">Tâche de la trappe &amp; sonde (Partie 2)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">A propos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.polytech.sorbonne-universite.fr">Polytech Sorbonne</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.isir.upmc.fr/">ISIR</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/peterso/robothon-grand-challenge">Robothon Grand Challenge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Robothon - Polytech Sorbonne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tâche du slider</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/slider.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tache-du-slider">
+<h1>Tâche du slider<a class="headerlink" href="#tache-du-slider" title="Link to this heading"></a></h1>
+<style>
+    .image{
+    border: 5px solid #116aa4;
+    border-radius: 10px;
+    /* padding: 2px; */
+    }
+</style>
+<section id="tache-pour-le-deplacement-du-slider-en-fonction-d-un-retour-visuel">
+<section id="objectifs">
+<h2>Objectifs<a class="headerlink" href="#objectifs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Aligner le triangle rouge avec le triangle jaune puis le triangle vert,</p></li>
+<li><p>Se servir de la caméra et de l’effecteur final pour déplacer le slider selon l’axe (donc une translation),</p></li>
+<li><p>Arrêter le déplcement du Panda une fois la tâche accomplie.</p></li>
+</ul>
+<p><h4>Etapes principales pour la réalisation de la tâche :</h4></p>
+<ul class="simple">
+<li><p>Positionner l’effecteur final au-dessus de l’écran pour bien percevoir le déplacement des triangles les uns par rapport aux autres,</p></li>
+<li><p>Ajuster le grippage des pinces pour saisir correctement le slider,</p></li>
+<li><p>Aligner les triangles au niveau de l’écran successivement comme décrit précédemment.</p></li>
+</ul>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/Ros_bag_launch.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id1">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Ici, on peut voir trois fenêtres de terminal dans le docker</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Les commandes tapées dans le terminal :</p>
+<ul class="simple">
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>roscore
+</pre></div>
+</div></li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rosbag<span class="w"> </span>play<span class="w"> </span>new9.bag<span class="w"> </span>-l
+</pre></div>
+</div></li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>roslaunch<span class="w"> </span>trajectory<span class="w"> </span>slider.launch<span class="w"> </span>
+</pre></div>
+</div></li>
+</ul>
+</section>
+<section id="positionnement-de-leffecteur-final-au-niveau-du-slider">
+<h2>Positionnement de l’effecteur final au niveau du slider<a class="headerlink" href="#positionnement-de-leffecteur-final-au-niveau-du-slider" title="Link to this heading"></a></h2>
+<p><h3>Utilisation de ROS :</h3></p>
+<ul class="simple">
+<li><p>A partir de l’URDF de la "<em>task-board</em>", qui contient déjà des repères ou des TFs au niveau de toutes les composantes 
+  (bouton bleu, bouton rouge, slider, bouton M5, position de départ du slider, poignée de la trappe, la sonde, et les deux connecteurs femelles), 
+  on peut indiquer au bras de robot d’aller directement au niveau de la TF du slider.</p></li>
+</ul>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/RVIZ_Panda_Box.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id2">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Simulation sur RVIZ avec le robot Panda et la task-board présents</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table align="center" cellspacing="20" cellpadding="5">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/TF_RVIZ_panda_EE_Slider.png"/>
+      </div>
+    </th>
+    <th>
+      <div class="image">
+        <img src="./img/new/TF_panda_EE_autre_vue.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id3">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">On peut voir ici les deux TFs : celui de l’effecteur final “panda_EE” et celui du slider “task_board_starting_slider_link”</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="alignement-des-triangles-au-niveau-de-lecran">
+<h2>Alignement des triangles au niveau de l’écran<a class="headerlink" href="#alignement-des-triangles-au-niveau-de-lecran" title="Link to this heading"></a></h2>
+<section id="organisation-des-codes-et-des-programmes-pour-le-traitement-dimage-et-le-deplacement-du-robot">
+<h3>Organisation des codes et des programmes pour le traitement d’image et le déplacement du robot<a class="headerlink" href="#organisation-des-codes-et-des-programmes-pour-le-traitement-dimage-et-le-deplacement-du-robot" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Un script python ("<em>triangle_detection_color.py</em>") permettra de faire le traitement d’image avec tous les masques et filtres intégrés pour la détection des triangles, qui se basera sur l’image capturée par la caméra,</p></li>
+<li><p>Un autre script ("<em>slider_controller.py</em>") pour le déplacement de l’effecteur final lui indiquant si oui ou non les triangles sont alignés,</p></li>
+<li><p>Un launchfile qui lance ces deux scripts en même temps, gérant en même temps l’aspect simulation et l’aspect réel de la réalisation de la tâche.</p></li>
+</ul>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/Screen_slider.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id4">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Image représentant l’écran M5 (avec les trois triangles)</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="simulation-sur-rviz">
+<h3>Simulation sur RVIZ<a class="headerlink" href="#simulation-sur-rviz" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Utilisation d’un “<em>rosbag</em>” pour simuler le déplacement des triangles en fonction du retour visuel, et intégration du robot avec la task-board sur RVIZ</p></li>
+</ul>
+<p>Pour enregistrer un <em>bag</em>, on doit saisir dans le terminal, au moment où la caméra capture :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rosbag<span class="w"> </span>record<span class="w"> </span>/topic<span class="w"> </span>--output-name<span class="o">=</span><span class="s2">&quot;name&quot;</span>
+</pre></div>
+</div>
+<p>Pour lancer le <em>bag</em>, il faut saisir :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rosbag<span class="w"> </span>play<span class="w"> </span>nom_du_fichier.bag<span class="w"> </span>-l<span class="w"> </span><span class="o">(</span>pour<span class="w"> </span>lire<span class="w"> </span>le<span class="w"> </span>fichier<span class="w"> </span>en<span class="w"> </span>boucle<span class="w"> </span>en<span class="w"> </span>boucle<span class="o">)</span>
+</pre></div>
+</div>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/EE_slider.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id5">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Alignement des TFs entre l’effecteur final et la position de départ du slider</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/bag_triangle.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id6">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Aperçu du bag qui a été enregistré</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<center><p>On voit ici la zone rognée qui nous servira pour le traitement, encadrée en vert.</p></center>
+</section>
+</section>
+<section id="methode-de-traitement-dimage-pour-distinguer-les-trois-triangles-rouge-vert-et-jaune">
+<h2>Méthode de traitement d’image pour distinguer les trois triangles (rouge, vert et jaune)<a class="headerlink" href="#methode-de-traitement-dimage-pour-distinguer-les-trois-triangles-rouge-vert-et-jaune" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Phase d’initialisation :</p>
+<ul>
+<li><p>Récupération et affichage du flux vidéo capturé par la caméra (récupération de l’image de la caméra sur RVIZ)</p></li>
+<li><p>Détection des centres des trois triangles (détection de formes et de leur gradient)</p></li>
+<li><p>Récupérer l’écart de position successif entre les triangles rouge et jaune puis rouge et vert à partir d’un “<em>publisher</em>”</p></li>
+</ul>
+</li><br>
+<li><p>Fonctionnement de la boucle principale :</p>
+<ul>
+<li><p>Affichage du flux vidéo de la caméra dans une fenêtre</p></li>
+<li><p>Application d’une fonction de prétraitement à cette vidéo pour récupérer la zone utile, rognée, de l’écran M5 :</p>
+<ul>
+<li><p>Conversion en couleur HSV</p></li>
+<li><p>Crétaion d’un masque de couleur bleu sur la vidéo avec élimination du bruit environnant</p></li>
+<li><p>Détection des contours bleus en définissant une condition sur l’aire</p></li>
+<li><p>Et enfin, rogner l’image originale capturée par la caméra</p></li>
+</ul>
+</li>
+<li><p>Traitement sur l’image récupérée :</p>
+<ul>
+<li><p>Conversion en couleur HSV</p></li>
+<li><p>Définition de la plage de couleur bleu et noir</p></li>
+<li><p>Appliquer l’addition des masques précédemment sur l’image pour n’avoir que les triangles visibles au final</p></li>
+</ul>
+</li>
+<li><p>Initialisation de plusieurs variables :</p>
+<ul>
+<li><p>La hauteur de la ligne séparant les triangles jaune et vert, du triangle rouge</p></li>
+<li><p>Les centres des triangles en fonction des dimensions maximales d’un triangle avec la hauteur et la largeur (lorsque la caméra est à sa position habituelle, c’est-à-dire lorsque l’effecteur final du robot est en contact direct avec le slider et arrive à le déplacer)</p></li>
+</ul>
+</li>
+</ul>
+</li><br>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/Masks.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id7">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Image représentant les 3 fenêtres avec les 3 masques (rouge, vert et jaune)</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<li><p>Phase de détection et contourage des triangles avec plusieurs cas à différencier :</p>
+<ul>
+<li><p>Détection du triangle jaune :</p>
+<ul>
+<li><p>Comme il apparaît toujours au centre de l’écran, il est plus simple de définir son contour en vérifiant les conditions,</p></li>
+</ul>
+</li>
+<li><p>Détection du triangle vert :</p>
+<ul>
+<li><p>Son contour sera détecté à condition qu’il n’est pas centré par rapport à l’image</p></li>
+</ul>
+</li>
+<li><p>Détection de deux triangles qui se superposent :</p>
+<ul>
+<li><p>C’est le cas où détecte un triangle beaucoup plus large</p></li>
+<li><p>On redéfinit donc les centres respectifs des triangles jaune et vert et on dessine le contours du triangle vert</p></li>
+</ul>
+</li>
+<li><p>Détection du triangle rouge :</p>
+<ul>
+<li><p>Une fois la phase de traitement et de détection des triangles jaune et vert réalisée, on va différencier les coordonnées en x des centres des triangles rouge er jaune lorsqu’un compteur est à 0 (distance entre les triangles rouge et jaune)</p></li>
+<li><p>Publication de cet écart sur le topic “ecart_position”</p></li>
+<li><p>Lorsque l’écrat se rapproche de 0 avec un écart de +1 ou -1, le compteur passe à 1 (pour signaler que le traitement de la distance entre les triangles rouge et vert est démarré)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table align="center" cellspacing="20" cellpadding="5">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/triangle_r_j.png"/>
+      </div>
+    </th>
+    <th>
+      <div class="image">
+        <img src="./img/new/triangle_r_v.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id8">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">On peut voir ici les deux passages : du triangle rouge au triangle jaune et du triangle rouge au triangle vert</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="lancement-pour-la-tache-du-slider-introduit-dans-le-superviseur">
+<h2>Lancement pour la tâche du slider, introduit dans le superviseur<a class="headerlink" href="#lancement-pour-la-tache-du-slider-introduit-dans-le-superviseur" title="Link to this heading"></a></h2>
+<p>Avec la méthode principale <em>run</em> du script “<code class="docutils literal notranslate"><span class="pre">positions.py</span></code>” qui permet de gérer tous les déplacements vers chaque TFs de la task-board en fonction de tâche, incluant celle du slider, on peut atteindre la position initiale du slider :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>Position<span class="w"> </span>:<span class="w"> </span>slider
+</pre></div>
+</div>
+<p>Avec cette commande entrée dans le terminale, l’effecteur finale du bras de robot va se placer pile au dessus de la TF “<code class="docutils literal notranslate"><span class="pre">task_board_starting_slider_link</span></code>” avant de pouvoir exécuter le traitements d’image pour l’alignement des triangles, et en simulation on obtient donc cette configuration :</p>
+<table align="center">
+  <tr>
+    <th>
+      <div class="image">
+        <img src="./img/new/EE_slider.png"/>
+      </div>
+    </th>
+  </tr>
+</table>
+<figure class="align-center" id="id9">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Positionnement de l’<code class="docutils literal notranslate"><span class="pre">End-Effector</span></code> au dessus de la TF du point de départ du slider</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="video-de-demonstration-de-la-tache">
+<h2>Vidéo de démonstration de la tâche<a class="headerlink" href="#video-de-demonstration-de-la-tache" title="Link to this heading"></a></h2>
+<p>Ci-dessous, vous aviez à disposition la vidéo d’exécution de la tâche du slider par le bras de robot Panda Franka Emika :</p>
+<table align="center">
+    <tr>
+        <th>
+            <div class="image">
+            <iframe width="700" height="600" src="https://drive.google.com/file/d/1J9k0EPy1_pLSPzk3RenUN272gEFDdgeK/preview" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </th>
+    </tr>
+</table>
+<figure class="align-center" id="id10">
+<div class="mermaid">
+            graph LR
+        </div><figcaption>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Vidéo d’exécution de la tâche du slider</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bouton-bleu.html" class="btn btn-neutral float-left" title="Tâche pour le bouton bleu" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="connector.html" class="btn btn-neutral float-right" title="Tâche de déplacement du connecteur de la sonde" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+<jinja2.runtime.BlockReference object at 0x7f69237e5b10>
+<!-- your custom footer here-->
+<!-- source : https://stackoverflow.com/questions/66919550/trouble-with-custom-footer-in-sphinx-rtd-theme -->
+<div>
+    <table align="center" style="width: 100%">
+        <tr>
+            <th>
+                <img src="./_static/logos/logo-polytech.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-su.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-isir.png"/>
+            </th>
+            <th>
+                <img src="./_static/logos/logo-robothon.png"/>
+            </th>
+        </tr>
+    </table>
+</div>
+
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
